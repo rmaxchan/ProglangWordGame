@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [341.0]
+metadata/_edit_vertical_guides_ = [550.0]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -13,10 +15,10 @@ script = ExtResource("1_ig7tw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 156.0
-offset_right = 856.0
-offset_bottom = 497.0
+offset_left = 309.0
+offset_top = 170.0
+offset_right = 786.0
+offset_bottom = 511.0
 alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control/VBoxContainer"]
@@ -36,6 +38,20 @@ layout_mode = 2
 text = "Submit"
 
 [node name="FeedbackLabel" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 179.0
+offset_right = 538.0
+offset_bottom = 230.0
+
+[node name="LivesLabel" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = "Lives:"
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer"]
 layout_mode = 2
 
 [connection signal="pressed" from="Control/VBoxContainer/SubmitButton" to="Control" method="on_word_submitted"]
