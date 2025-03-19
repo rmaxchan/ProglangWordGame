@@ -6,6 +6,7 @@ var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
 var player_hand := []
 var dictionary := []
 var score := 0
+var lives := 3
 var letter_points := {
 	'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1,
 	'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8,
@@ -17,6 +18,7 @@ var letter_points := {
 
 @onready var letters_container = $VBoxContainer/LettersContainer
 @onready var score_label = $VBoxContainer/ScoreLabel
+@onready var lives_label = Label.new()
 
 #INITIAL
 func _ready():
@@ -24,6 +26,14 @@ func _ready():
 	update_display()
 	load_dictionary()
 
+func setup_lives_display():
+	lives_label.text = "Lives: %d" % lives
+	$VBoxContainer.add_child(lives_label)
+
+func game_over():
+	$VBoxContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
+	$VBoxContainer/SubmitButton.disabled = true
+	$VBoxContainer/WordInput.editable = false
 
 func draw_initial_hand():
 	for i in range(10):
@@ -90,9 +100,12 @@ func on_word_submitted():
 		$VBoxContainer/FeedbackLabel.text = "✅ Word Accepted!"
 		remove_used_letters(input_word)
 		draw_letters()
-		#TODO: lives counter for non-proglang words accepted
 	else:
+		lives -= 1
+		lives_label.text = "Lives: %d" % lives
 		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
+		if lives <= 0:
+			game_over()
 	update_display()
 	$VBoxContainer/WordInput.text = ""
 
