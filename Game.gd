@@ -5,8 +5,10 @@ var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
 					'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
 var player_hand := []
 var dictionary := []
+var dictionary_prog := []
 var score := 0
 var lives := 3
+var reaction := 0
 var letter_points := {
 	'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1,
 	'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8,
@@ -72,14 +74,23 @@ func update_display():
 # Update UI
 
 func load_dictionary():
-	var file = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
-	if file:
-		var content = file.get_as_text().strip_edges().to_upper()
+	var file_eng = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
+	if file_eng:
+		var content = file_eng.get_as_text().strip_edges().to_upper()
 		for word in content.split(","):
 			var clean_word = word.strip_edges()
 			if clean_word != "":
 				dictionary.append(clean_word)
 		print("Dictionary loaded with %d words" % dictionary.size())
+	
+	var file_prog = FileAccess.open("res://assets/dictionary_prog.txt", FileAccess.READ)
+	if file_prog:
+		var content = file_prog.get_as_text().strip_edges().to_upper()
+		for word in content.split(","):
+			var clean_word = word.strip_edges()
+			if clean_word != "":
+				dictionary_prog.append(clean_word)
+		print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
 
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
@@ -112,19 +123,29 @@ func draw_letters():
 func on_word_submitted():
 	var input_word = $VBoxContainer/WordInput.text.to_upper()
 	if is_word_valid(input_word):
+		if dictionary_prog.has(input_word):
+			$VBoxContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
+			reaction = 1;
+			lives = 3;
+			update_lives_asset()
+		else:
+			$VBoxContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
+			reaction = 0;
+			lives -= 1;
+			update_lives_asset()
+		
 		var word_score = calculate_score(input_word)
 		score += word_score
+		if dictionary_prog.has(input_word):
+			word_score *= 2
 		score_label.text = "Score: %d" % score
-		$VBoxContainer/FeedbackLabel.text = "✅ Word Accepted!"
 		remove_used_letters(input_word)
 		draw_letters()
-	else:
-		lives -= 1
-		#lives_label.text = "Lives: %d" % lives
-		update_lives_asset()
-		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
+		
 		if lives <= 0:
 			game_over()
+	else:
+		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
 	update_display()
 	$VBoxContainer/WordInput.text = ""
 

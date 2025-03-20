@@ -47,10 +47,10 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 visibility_layer = 3
 layout_mode = 0
-offset_left = 687.0
-offset_top = 383.0
-offset_right = 870.0
-offset_bottom = 440.0
+offset_left = 796.0
+offset_top = 315.0
+offset_right = 979.0
+offset_bottom = 372.0
 theme = SubResource("Theme_ig7tw")
 
 [connection signal="pressed" from="Control/VBoxContainer/SubmitButton" to="Control" method="on_word_submitted"]
