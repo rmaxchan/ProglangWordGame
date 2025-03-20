@@ -20,14 +20,15 @@ var letter_points := {
 
 @onready var letters_container = $VBoxContainer/LettersContainer
 @onready var score_label = $VBoxContainer/ScoreLabel
-#@onready var lives_label = Label.new()
 @onready var lives_container = $HBoxContainer
+@onready var reaction_image = $ReactionImage
+@export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
 
 #INITIAL
 func _ready():
 	draw_initial_hand()
-	update_display()
+	update_text_display()
 	load_dictionary()
 	update_lives_asset()
 
@@ -63,7 +64,11 @@ func update_lives_asset():
 		heart_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		lives_container.add_child(heart_icon)
 
-func update_display():
+func update_reaction_asset():
+	if reaction >= 0 and reaction < reaction_texture.size():
+		reaction_image.texture = reaction_texture[reaction]
+
+func update_text_display():
 	for child in letters_container.get_children():
 		child.queue_free()
 	
@@ -118,7 +123,7 @@ func draw_letters():
 			player_hand.append(consonants.pick_random())
 	#TODO: balance?
 
-	update_display()
+	update_text_display()
 
 func on_word_submitted():
 	var input_word = $VBoxContainer/WordInput.text.to_upper()
@@ -146,7 +151,9 @@ func on_word_submitted():
 			game_over()
 	else:
 		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
-	update_display()
+		reaction = 2;
+	update_text_display()
+	update_reaction_asset()
 	$VBoxContainer/WordInput.text = ""
 
 func remove_used_letters(word: String):

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=7 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://bbju5s5trvicd" path="res://assets/0.png" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bi4wwfgcl326s" path="res://assets/1.png" id="3_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b78syonvfwue4" path="res://assets/2.png" id="4_272bh"]
 
 [sub_resource type="Theme" id="Theme_ig7tw"]
 
@@ -15,6 +18,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ig7tw")
+reaction_texture = Array[Texture2D]([ExtResource("2_lquwl"), ExtResource("3_7mycd"), ExtResource("4_272bh")])
 heart_texture = ExtResource("2_0xm2m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
@@ -52,5 +56,13 @@ offset_top = 315.0
 offset_right = 979.0
 offset_bottom = 372.0
 theme = SubResource("Theme_ig7tw")
+
+[node name="ReactionImage" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 174.0
+offset_top = 269.0
+offset_right = 294.0
+offset_bottom = 389.0
 
 [connection signal="pressed" from="Control/VBoxContainer/SubmitButton" to="Control" method="on_word_submitted"]
