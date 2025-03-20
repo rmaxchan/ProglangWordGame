@@ -1,10 +1,63 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=60 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://bbju5s5trvicd" path="res://assets/0.png" id="2_lquwl"]
-[ext_resource type="Texture2D" uid="uid://bi4wwfgcl326s" path="res://assets/1.png" id="3_7mycd"]
-[ext_resource type="Texture2D" uid="uid://b78syonvfwue4" path="res://assets/2.png" id="4_272bh"]
+[ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
+[ext_resource type="Texture2D" uid="uid://bbju5s5trvicd" path="res://assets/0.png" id="2_vke2r"]
+[ext_resource type="Texture2D" uid="uid://bi4wwfgcl326s" path="res://assets/1.png" id="3_uit24"]
+[ext_resource type="Texture2D" uid="uid://b78syonvfwue4" path="res://assets/2.png" id="4_ruth0"]
+[ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="5_rm4vd"]
+[ext_resource type="Texture2D" uid="uid://b1xnyysoxf06b" path="res://assets/keyboard/normal/L. Key 1.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://dgqcibnwmksqe" path="res://assets/keyboard/normal/L. Key 17.png" id="6_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://c7xbv5x3x45e8" path="res://assets/keyboard/pressed/L. Key 1.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://5mn0ignb3pak" path="res://assets/keyboard/pressed/L. Key 17.png" id="7_facbu"]
+[ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
+[ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
+[ext_resource type="Texture2D" uid="uid://mxfwmsbd5s0s" path="res://assets/keyboard/normal/L. Key 18.png" id="12_0cp0l"]
+[ext_resource type="Texture2D" uid="uid://bc2oxuvtpaj1" path="res://assets/keyboard/pressed/L. Key 18.png" id="13_d2t1y"]
+[ext_resource type="Texture2D" uid="uid://dpmuskyuqiec3" path="res://assets/keyboard/normal/L. Key 20.png" id="14_gngh3"]
+[ext_resource type="Texture2D" uid="uid://dsj5x2pv0nnn1" path="res://assets/keyboard/pressed/L. Key 20.png" id="15_0n3wm"]
+[ext_resource type="Texture2D" uid="uid://b6duup646v8nc" path="res://assets/keyboard/normal/L. Key 24.png" id="16_qnost"]
+[ext_resource type="Texture2D" uid="uid://csr4qrn6j8smj" path="res://assets/keyboard/pressed/L. Key 24.png" id="17_wnkbs"]
+[ext_resource type="Texture2D" uid="uid://cydyvqqxw0ldh" path="res://assets/keyboard/normal/L. Key 21.png" id="18_f6a44"]
+[ext_resource type="Texture2D" uid="uid://cnx445l7x7jim" path="res://assets/keyboard/pressed/L. Key 21.png" id="19_0cbny"]
+[ext_resource type="Texture2D" uid="uid://ck66sdxgir4ql" path="res://assets/keyboard/normal/L. Key 9.png" id="20_hrvbo"]
+[ext_resource type="Texture2D" uid="uid://bagniirbqcrfe" path="res://assets/keyboard/pressed/L. Key 9.png" id="21_uypp3"]
+[ext_resource type="Texture2D" uid="uid://bheveadnphhqa" path="res://assets/keyboard/normal/L. Key 15.png" id="22_blkrb"]
+[ext_resource type="Texture2D" uid="uid://ben74mams5wrv" path="res://assets/keyboard/pressed/L. Key 15.png" id="23_abqjc"]
+[ext_resource type="Texture2D" uid="uid://dny8jm7dpldg2" path="res://assets/keyboard/normal/L. Key 16.png" id="24_6iyjs"]
+[ext_resource type="Texture2D" uid="uid://cdawb4xmct5s7" path="res://assets/keyboard/pressed/L. Key 16.png" id="25_4w656"]
+[ext_resource type="Texture2D" uid="uid://dgqri2lwuad12" path="res://assets/keyboard/normal/L. Key 19.png" id="28_e71vb"]
+[ext_resource type="Texture2D" uid="uid://ccsy76lbq126q" path="res://assets/keyboard/pressed/L. Key 19.png" id="29_rnkwl"]
+[ext_resource type="Texture2D" uid="uid://cad14j1pmvndg" path="res://assets/keyboard/normal/L. Key 4.png" id="30_vke2r"]
+[ext_resource type="Texture2D" uid="uid://qw76eckjurth" path="res://assets/keyboard/pressed/L. Key 4.png" id="31_uit24"]
+[ext_resource type="Texture2D" uid="uid://biiokvhqiwtkn" path="res://assets/keyboard/normal/L. Key 6.png" id="32_ruth0"]
+[ext_resource type="Texture2D" uid="uid://bjo5yya6gxr22" path="res://assets/keyboard/pressed/L. Key 6.png" id="33_rm4vd"]
+[ext_resource type="Texture2D" uid="uid://q3gcmupcsogg" path="res://assets/keyboard/normal/L. Key 7.png" id="34_pjyto"]
+[ext_resource type="Texture2D" uid="uid://c86xu4a18135i" path="res://assets/keyboard/pressed/L. Key 7.png" id="35_sm6fg"]
+[ext_resource type="Texture2D" uid="uid://bg882eqfsvgio" path="res://assets/keyboard/normal/L. Key 8.png" id="36_b17eg"]
+[ext_resource type="Texture2D" uid="uid://chgfnvhjpuooq" path="res://assets/keyboard/pressed/L. Key 8.png" id="37_rnkwl"]
+[ext_resource type="Texture2D" uid="uid://s2e57c3ok5u" path="res://assets/keyboard/normal/L. Key 10.png" id="38_vke2r"]
+[ext_resource type="Texture2D" uid="uid://04eqbxvmvbgu" path="res://assets/keyboard/pressed/L. Key 10.png" id="39_uit24"]
+[ext_resource type="Texture2D" uid="uid://g8chcqxcxdsa" path="res://assets/keyboard/normal/L. Key 11.png" id="40_ruth0"]
+[ext_resource type="Texture2D" uid="uid://dea2bdebl4nbj" path="res://assets/keyboard/normal/L. Key 26.png" id="41_6iyjs"]
+[ext_resource type="Texture2D" uid="uid://6lchla4kqor1" path="res://assets/keyboard/pressed/L. Key 11.png" id="41_rm4vd"]
+[ext_resource type="Texture2D" uid="uid://cumxvdxtln3p8" path="res://assets/keyboard/pressed/L. Key 26.png" id="42_4w656"]
+[ext_resource type="Texture2D" uid="uid://banlplkin2ccf" path="res://assets/keyboard/normal/L. Key 12.png" id="42_pjyto"]
+[ext_resource type="Texture2D" uid="uid://bnhulhcekcvrg" path="res://assets/keyboard/pressed/L. Key 12.png" id="43_sm6fg"]
+[ext_resource type="Texture2D" uid="uid://cmn6l8jknjhav" path="res://assets/keyboard/normal/L. Key 25.png" id="44_b17eg"]
+[ext_resource type="Texture2D" uid="uid://vp82in4iitb0" path="res://assets/keyboard/pressed/L. Key 25.png" id="45_ntx8l"]
+[ext_resource type="Texture2D" uid="uid://byvuae80d7qhn" path="res://assets/keyboard/normal/L. Key 23.png" id="46_uatky"]
+[ext_resource type="Texture2D" uid="uid://mpmmb6224ja" path="res://assets/keyboard/normal/L. Key 22.png" id="47_e71vb"]
+[ext_resource type="Texture2D" uid="uid://clt858r4ry5g" path="res://assets/keyboard/pressed/L. Key 23.png" id="47_rqtf5"]
+[ext_resource type="Texture2D" uid="uid://bp1x3jk4hc65" path="res://assets/keyboard/normal/L. Key 3.png" id="48_1vm84"]
+[ext_resource type="Texture2D" uid="uid://g5au86ieqphj" path="res://assets/keyboard/pressed/L. Key 22.png" id="48_rnkwl"]
+[ext_resource type="Texture2D" uid="uid://bu0jcuafeul86" path="res://assets/keyboard/pressed/L. Key 3.png" id="49_wu3dr"]
+[ext_resource type="Texture2D" uid="uid://co2i5p25mu36y" path="res://assets/keyboard/normal/L. Key 2.png" id="52_jx0wj"]
+[ext_resource type="Texture2D" uid="uid://di4ly5mbqlcly" path="res://assets/keyboard/pressed/L. Key 2.png" id="53_kkkcx"]
+[ext_resource type="Texture2D" uid="uid://dkg8n5fy64ljs" path="res://assets/keyboard/normal/L. Key 14.png" id="54_34ol3"]
+[ext_resource type="Texture2D" uid="uid://djbo4ermgq4gi" path="res://assets/keyboard/pressed/L. Key 14.png" id="55_c2n8d"]
+[ext_resource type="Texture2D" uid="uid://ctus31x8r5y1" path="res://assets/keyboard/normal/L. Key 13.png" id="56_wy5fy"]
+[ext_resource type="Texture2D" uid="uid://dxwt7w1j21du0" path="res://assets/keyboard/pressed/L. Key 13.png" id="57_gx4rg"]
 
 [sub_resource type="Theme" id="Theme_ig7tw"]
 
@@ -18,15 +71,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ig7tw")
-reaction_texture = Array[Texture2D]([ExtResource("2_lquwl"), ExtResource("3_7mycd"), ExtResource("4_272bh")])
-heart_texture = ExtResource("2_0xm2m")
+reaction_texture = Array[Texture2D]([ExtResource("2_vke2r"), ExtResource("3_uit24"), ExtResource("4_ruth0")])
+heart_texture = ExtResource("5_rm4vd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 309.0
-offset_top = 170.0
+offset_top = 5.0
 offset_right = 786.0
-offset_bottom = 511.0
+offset_bottom = 346.0
 alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control/VBoxContainer"]
@@ -39,7 +92,9 @@ layout_mode = 2
 [node name="WordInput" type="LineEdit" parent="Control/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Start typing here..."
+keep_editing_on_text_submit = true
 emoji_menu_enabled = false
+virtual_keyboard_enabled = false
 
 [node name="SubmitButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -48,21 +103,213 @@ text = "Submit"
 [node name="FeedbackLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="LivesContainer" type="HBoxContainer" parent="Control"]
 visibility_layer = 3
 layout_mode = 0
 offset_left = 796.0
-offset_top = 315.0
+offset_top = 150.0
 offset_right = 979.0
-offset_bottom = 372.0
+offset_bottom = 207.0
 theme = SubResource("Theme_ig7tw")
 
 [node name="ReactionImage" type="TextureRect" parent="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 174.0
-offset_top = 269.0
-offset_right = 294.0
-offset_bottom = 389.0
+offset_left = 182.0
+offset_top = 107.0
+offset_right = 302.0
+offset_bottom = 227.0
 
+[node name="KeyboardControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 371.0
+offset_top = 259.0
+offset_right = 411.0
+offset_bottom = 299.0
+script = ExtResource("2_6iyjs")
+
+[node name="KBDContainerTop" type="HBoxContainer" parent="KeyboardControl"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 54.0
+offset_right = 244.0
+offset_bottom = 70.0
+scale = Vector2(1.5, 1.5)
+
+[node name="ButtonQ" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("6_ok6jj")
+texture_pressed = ExtResource("7_facbu")
+
+[node name="ButtonW" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("46_uatky")
+texture_pressed = ExtResource("47_rqtf5")
+
+[node name="ButtonE" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("10_h8e4i")
+texture_pressed = ExtResource("11_4lmeg")
+
+[node name="ButtonR" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("12_0cp0l")
+texture_pressed = ExtResource("13_d2t1y")
+
+[node name="ButtonT" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("14_gngh3")
+texture_pressed = ExtResource("15_0n3wm")
+
+[node name="ButtonY" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("44_b17eg")
+texture_pressed = ExtResource("45_ntx8l")
+
+[node name="ButtonU" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("18_f6a44")
+texture_pressed = ExtResource("19_0cbny")
+
+[node name="ButtonI" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("20_hrvbo")
+texture_pressed = ExtResource("21_uypp3")
+
+[node name="ButtonO" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("22_blkrb")
+texture_pressed = ExtResource("23_abqjc")
+
+[node name="ButtonP" type="TextureButton" parent="KeyboardControl/KBDContainerTop"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("24_6iyjs")
+texture_pressed = ExtResource("25_4w656")
+
+[node name="KBDContainerMid" type="HBoxContainer" parent="KeyboardControl"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 84.0
+offset_right = 228.0
+offset_bottom = 100.0
+scale = Vector2(1.5, 1.5)
+alignment = 1
+
+[node name="ButtonA" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("6_272bh")
+texture_pressed = ExtResource("7_5vw27")
+
+[node name="ButtonS" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("28_e71vb")
+texture_pressed = ExtResource("29_rnkwl")
+
+[node name="ButtonD" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("30_vke2r")
+texture_pressed = ExtResource("31_uit24")
+
+[node name="ButtonF" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("32_ruth0")
+texture_pressed = ExtResource("33_rm4vd")
+
+[node name="ButtonG" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("34_pjyto")
+texture_pressed = ExtResource("35_sm6fg")
+
+[node name="ButtonH" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("36_b17eg")
+texture_pressed = ExtResource("37_rnkwl")
+
+[node name="ButtonJ" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("38_vke2r")
+texture_pressed = ExtResource("39_uit24")
+
+[node name="ButtonK" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("40_ruth0")
+texture_pressed = ExtResource("41_rm4vd")
+
+[node name="ButtonL" type="TextureButton" parent="KeyboardControl/KBDContainerMid"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("42_pjyto")
+texture_pressed = ExtResource("43_sm6fg")
+
+[node name="KBDContainerBot" type="HBoxContainer" parent="KeyboardControl"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 115.0
+offset_right = 228.0
+offset_bottom = 131.0
+scale = Vector2(1.5, 1.5)
+alignment = 1
+
+[node name="ButtonZ" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("41_6iyjs")
+texture_pressed = ExtResource("42_4w656")
+
+[node name="ButtonX" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("16_qnost")
+texture_pressed = ExtResource("17_wnkbs")
+
+[node name="ButtonC" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("48_1vm84")
+texture_pressed = ExtResource("49_wu3dr")
+
+[node name="ButtonV" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("47_e71vb")
+texture_pressed = ExtResource("48_rnkwl")
+
+[node name="ButtonB" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("52_jx0wj")
+texture_pressed = ExtResource("53_kkkcx")
+
+[node name="ButtonN" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("54_34ol3")
+texture_pressed = ExtResource("55_c2n8d")
+
+[node name="ButtonM" type="TextureButton" parent="KeyboardControl/KBDContainerBot"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("56_wy5fy")
+texture_pressed = ExtResource("57_gx4rg")
+
+[connection signal="button_down" from="Control/VBoxContainer/SubmitButton" to="Control" method="ui_text_submit"]
 [connection signal="pressed" from="Control/VBoxContainer/SubmitButton" to="Control" method="on_word_submitted"]

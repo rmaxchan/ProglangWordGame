@@ -20,10 +20,11 @@ var letter_points := {
 
 @onready var letters_container = $VBoxContainer/LettersContainer
 @onready var score_label = $VBoxContainer/ScoreLabel
-@onready var lives_container = $HBoxContainer
+@onready var lives_container = $LivesContainer
 @onready var reaction_image = $ReactionImage
 @export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
+@export var key_button: Dictionary = {}
 
 #INITIAL
 func _ready():
@@ -31,6 +32,11 @@ func _ready():
 	update_text_display()
 	load_dictionary()
 	update_lives_asset()
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+			on_word_submitted()
 
 func setup_lives_display():
 	lives_container.clear_children()
@@ -165,5 +171,8 @@ func calculate_score(word: String) -> int:
 	for letter in word:
 		word_score += letter_points.get(letter, 0)
 		print("Score added:%d" % word_score + "into %d" % score)
-		#TODO: proglang multiplier + debugging
 	return word_score
+
+
+func ui_text_submit() -> void:
+	pass # Replace with function body.
