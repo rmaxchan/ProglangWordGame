@@ -18,17 +18,25 @@ var letter_points := {
 
 @onready var letters_container = $VBoxContainer/LettersContainer
 @onready var score_label = $VBoxContainer/ScoreLabel
-@onready var lives_label = Label.new()
+#@onready var lives_label = Label.new()
+@onready var lives_container = $HBoxContainer
+@export var heart_texture: Texture2D
 
 #INITIAL
 func _ready():
 	draw_initial_hand()
 	update_display()
 	load_dictionary()
+	update_lives_asset()
 
 func setup_lives_display():
-	lives_label.text = "Lives: %d" % lives
-	$VBoxContainer.add_child(lives_label)
+	lives_container.clear_children()
+	for i in range(3):
+		var heart_texture = TextureRect.new()
+		heart_texture.texture = load("res://assets/heart64.png")
+		heart_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+		heart_texture.custom_minimum_size = Vector2(64,64)
+		lives_container.add_child(heart_texture)
 
 func game_over():
 	$VBoxContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
@@ -43,7 +51,16 @@ func draw_initial_hand():
 			player_hand.append(consonants.pick_random())
 
 # Update UI
-#TODO: Asset handler
+func update_lives_asset():
+	for child in lives_container.get_children():
+		child.queue_free()
+	
+	for i in range (lives):
+		var heart_icon = TextureRect.new()
+		heart_icon.texture = heart_texture
+		heart_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		lives_container.add_child(heart_icon)
+
 func update_display():
 	for child in letters_container.get_children():
 		child.queue_free()
@@ -52,6 +69,7 @@ func update_display():
 		var letter_label = Label.new()
 		letter_label.text = letter
 		letters_container.add_child(letter_label)
+# Update UI
 
 func load_dictionary():
 	var file = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
@@ -102,7 +120,8 @@ func on_word_submitted():
 		draw_letters()
 	else:
 		lives -= 1
-		lives_label.text = "Lives: %d" % lives
+		#lives_label.text = "Lives: %d" % lives
+		update_lives_asset()
 		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
 		if lives <= 0:
 			game_over()

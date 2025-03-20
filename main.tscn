@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=4 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="2_0xm2m"]
+
+[sub_resource type="Theme" id="Theme_ig7tw"]
 
 [node name="Main" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [341.0]
@@ -12,6 +15,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ig7tw")
+heart_texture = ExtResource("2_0xm2m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -41,17 +45,12 @@ text = "Submit"
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+visibility_layer = 3
 layout_mode = 0
-offset_left = 214.0
-offset_top = 179.0
-offset_right = 538.0
-offset_bottom = 230.0
-
-[node name="LivesLabel" type="Label" parent="Control/HBoxContainer"]
-layout_mode = 2
-text = "Lives:"
-
-[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer"]
-layout_mode = 2
+offset_left = 687.0
+offset_top = 383.0
+offset_right = 870.0
+offset_bottom = 440.0
+theme = SubResource("Theme_ig7tw")
 
 [connection signal="pressed" from="Control/VBoxContainer/SubmitButton" to="Control" method="on_word_submitted"]
