@@ -18,10 +18,13 @@ var letter_points := {
 	'Z': 10
 }
 
-@onready var letters_container = $VBoxContainer/LettersContainer
-@onready var score_label = $VBoxContainer/ScoreLabel
+@onready var letters_container = $InputContainer/LettersContainer
+@onready var score_label = $InputContainer/ScoreLabel
 @onready var lives_container = $LivesContainer
 @onready var reaction_image = $ReactionImage
+@onready var last_word_label = $DefContainer/LastWordLabel
+@onready var definition_label = $DefContainer/DefinitionLabel
+
 @export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
 @export var key_button: Dictionary = {}
@@ -35,6 +38,9 @@ func _ready():
 	update_lives_asset()
 	var keyboard = get_node("/root/Main/KeyboardControl")
 	keyboard.key_press.connect(on_virtual_kbd_pressed)
+	
+	last_word_label.text = "Your last input shows up here"
+	#definition_label.text = "Programming terms are defined here"
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -51,9 +57,9 @@ func setup_lives_display():
 		lives_container.add_child(heart_texture)
 
 func game_over():
-	$VBoxContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
-	$VBoxContainer/SubmitButton.disabled = true
-	$VBoxContainer/WordInput.editable = false
+	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
+	$InputContainer/SubmitButton.disabled = true
+	$InputContainer/WordInput.editable = false
 
 # Letters
 func draw_initial_hand():
@@ -76,12 +82,12 @@ func draw_letters():
 	for i in range(4):
 		if player_hand.size() >= 10:
 			break
-		if vowel_count < 2:
+		if vowel_count < 3:
 			var letter = vowels.pop_back()
 			if not player_hand.has(letter):
 				player_hand.append(letter)
 				vowel_count += 1
-		elif letters_all.size() > 0:
+		else:
 			var letter = letters_all.pop_back()
 			if not player_hand.has(letter):
 				player_hand.append(letter)
@@ -131,6 +137,14 @@ func update_text_display():
 		var letter_label = Label.new()
 		letter_label.text = letter
 		letters_container.add_child(letter_label)
+
+func update_last_word_display(input_word: String):
+	if dictionary_prog.has(input_word):
+		definition_label.text = "Definition: %s" % dictionary_prog[input_word]
+		#print("Definition found!")
+	else:
+		definition_label.text = ""
+	definition_label.queue_redraw()
 # Update UI
 
 func load_dictionary():
@@ -142,6 +156,7 @@ func load_dictionary():
 			if clean_word != "":
 				dictionary.append(clean_word)
 		print("Dictionary loaded with %d words" % dictionary.size())
+		file_eng.close()
 	
 	var file_prog = FileAccess.open("res://assets/dictionary_prog.txt", FileAccess.READ)
 	if file_prog:
@@ -159,8 +174,9 @@ func load_dictionary():
 			#var clean_word = word.strip_edges()
 			#if clean_word != "":
 				#dictionary_prog.append(clean_word)
+		file_prog.close()
 		print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
-	print(dictionary_prog) #debug
+	#print(dictionary_prog) #debug
 
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
@@ -182,21 +198,23 @@ func is_word_valid(word: String) -> bool:
 # Buttons
 func on_virtual_kbd_pressed(key_letter: String):
 	var letter = key_letter.replace("Button","").to_lower()
-	$VBoxContainer/WordInput.text += letter;
+	$InputContainer/WordInput.text += letter;
 
 func on_word_submitted():
-	var input_word = $VBoxContainer/WordInput.text.to_upper()
+	var input_word = $InputContainer/WordInput.text.to_upper()
+	last_word_label.text = "Last input: %s" % input_word
 	if is_word_valid(input_word):
 		if dictionary_prog.has(input_word.to_lower()):
-			$VBoxContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
+			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
 			update_lives_asset()
 		else:
-			$VBoxContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
+			$InputContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
 			reaction = 0;
 			lives -= 1;
 			update_lives_asset()
+		update_last_word_display(input_word.to_lower())
 		
 		var word_score = calculate_score(input_word)
 		if dictionary_prog.has(input_word.to_lower()):
@@ -209,11 +227,11 @@ func on_word_submitted():
 		if lives <= 0:
 			game_over()
 	else:
-		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
+		$InputContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
 		reaction = 2;
 	update_text_display()
 	update_reaction_asset()
-	$VBoxContainer/WordInput.text = ""
+	$InputContainer/WordInput.text = ""
 # Button
 
 func calculate_score(word: String) -> int:

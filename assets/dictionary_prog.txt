@@ -1,18 +1,33 @@
-abacus,
-test,
-pip,
-git,
-regex,
-cpp,
-java,
-code,
-log,
-python,
-csharp,
-cplusplus,
-swift,
-script,
-debug,
-bug,
-asset,
-fix,
+abacus,"An ancient tool for performing arithmetic calculations, an early step toward computational thinking."
+code,"A set of instructions and programs sent as instructions to a machine."
+khwarizmi,"A Persian mathematician (9th century) who developed algorithmic thinking; the term "'algorithm' comes from his name."
+leibniz,"A German mathematician who developed the binary number system, fundamental to modern computing."
+binary,"A numeral system using only 0s and 1s, the foundation of computer processing."
+jacquard,"Refers to the Jacquard Loom (1801), which used punched cards to automate weaving patterns, influencing early computing."
+babbage,"Refers to Charles Babbage, who designed the Analytical Engine (1837), an early mechanical computer."
+lovelace,"Refers to Ada Lovelace, the first computer programmer, who wrote algorithms for Babbage’s Analytical Engine."
+hollerith,"Refers to Herman Hollerith, who developed a punch card system (1890) for data processing, leading to early computers."
+turing,"Refers to Alan Turing, who developed the concept of the Turing Machine (1936), the foundation of modern computing."
+eniac,"Stands for Electronic Numerical Integrator and Computer (1945), one of the first general-purpose electronic computers."
+neumann,"Refers to John von Neumann, who developed the stored-program architecture, fundamental to modern computers."
+machine,"The lowest-level programming language, written in binary (0s and 1s) and executed directly by a CPU."
+assembly,"A low-level language that uses mnemonics (short codes) instead of binary, closely tied to machine code."
+fortran,"The first high-level programming language (1957), designed for scientific and mathematical computing."
+lisp,"Created in 1958, one of the oldest programming languages, mainly used in artificial intelligence (AI)."
+cobol,"Created in 1959, designed for business applications and financial systems."
+algol,"An influential early programming language (1960), introduced structured programming concepts."
+basic,"Created in 1964 for beginners, widely used in early personal computers."
+clang,"Created in 1972, one of the most influential languages, used for system programming and the basis for many modern languages."
+pascal,"Created in 1970, designed for teaching structured programming."
+smalltalk,"Developed in the 1970s, one of the first object-oriented programming (OOP) languages."
+prolog,"A logic programming language (1972), mainly used in AI and natural language processing."
+ada,"Developed in 1980, mainly used for military and embedded systems."
+cplusplus,"Created in 1983 as an extension of C, introducing object-oriented programming (OOP)."
+perl,"Created in 1987, used for text processing and web development."
+python,"Introduced in 1991, known for its readability and simplicity, widely used in various fields."
+java,"Introduced in 1995, follows "write once, run anywhere," widely used for web and enterprise applications."
+javascript,"Introduced in 1995, the primary language for web development."
+php,"Created in 1995, used for server-side web development."
+csharp,"Developed by Microsoft (2000), widely used for Windows applications and game development (Unity)."
+swift,"Introduced by Apple (2014) as a modern replacement for Objective-C in iOS/macOS development."
+git,"Placeholder"
