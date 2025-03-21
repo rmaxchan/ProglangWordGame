@@ -68,21 +68,32 @@ func draw_initial_hand():
 			#player_hand.append(vowels.pick_random())
 		#else:
 			#player_hand.append(consonants.pick_random())
-	letters_all.shuffle()
-	while player_hand.size() < 10 and letters_all.size() > 0:
-		var letter = letters_all.pop_back()
-		player_hand.append(letter)
+	
+	var vowels_drawn = []
+
+	while vowels_drawn.size() < 3 and vowels.size() > 0:
+		vowels.shuffle()
+		var vowel = vowels.pop_back()
+		vowels_drawn.append(vowel)
+	while player_hand.size() + vowels_drawn.size() < 10 and letters_all.size() > 0:
+		consonants.shuffle()
+		var cons = consonants.pop_back()
+		player_hand.append(cons)
+
+	player_hand.append_array(vowels_drawn)
+	player_hand.shuffle()
 	update_text_display()
 
 func draw_letters():
-	letters_all.shuffle
-	vowels.shuffle()
 	var vowel_count = player_hand.count(func(l): vowels.has(l))
 
-	for i in range(4):
+	for i in range(5):
+		letters_all.shuffle()
 		if player_hand.size() >= 10:
 			break
 		if vowel_count < 3:
+			vowels.shuffle()
+			print("vowel count is %d" % vowel_count)
 			var letter = vowels.pop_back()
 			if not player_hand.has(letter):
 				player_hand.append(letter)
