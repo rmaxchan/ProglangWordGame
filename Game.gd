@@ -205,11 +205,6 @@ func setup_lives_display():
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
 		return false
-	if dictionary_prog.has(word.to_lower()):
-		return true
-	if not dictionary.has(word):
-		return false
-
 	var temp_hand := player_hand.duplicate()
 	for letter in word:
 		if letter in temp_hand:
@@ -217,6 +212,10 @@ func is_word_valid(word: String) -> bool:
 			continue
 		else:
 			return false
+	if dictionary_prog.has(word.to_lower()):
+		return true
+	if not dictionary.has(word):
+		return false
 	return true
 
 func calculate_score(word: String) -> int:
