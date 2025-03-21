@@ -5,7 +5,7 @@ var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
 					'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
 var player_hand := []
 var dictionary := []
-var dictionary_prog := []
+var dictionary_prog := {}
 var score := 0
 var lives := 3
 var reaction := 0
@@ -98,23 +98,32 @@ func load_dictionary():
 	
 	var file_prog = FileAccess.open("res://assets/dictionary_prog.txt", FileAccess.READ)
 	if file_prog:
-		var content = file_prog.get_as_text().strip_edges().to_upper()
-		for word in content.split(","):
-			var clean_word = word.strip_edges()
-			if clean_word != "":
-				dictionary_prog.append(clean_word)
+		while not file_prog.eof_reached():
+			var line = file_prog.get_line().strip_edges()
+			if line.is_empty():
+				continue
+			var comma_split = line.find(",")
+			if comma_split != -1:
+				var word = line.substr(0, comma_split).strip_edges().trim_prefix('"').trim_suffix('"')
+				var definition = line.substr(comma_split + 1).strip_edges().trim_prefix('"').trim_suffix('"')
+				dictionary_prog[word] = definition
+		#var content = file_prog.get_as_text().strip_edges().to_upper()
+		#for word in content.split(","):
+			#var clean_word = word.strip_edges()
+			#if clean_word != "":
+				#dictionary_prog.append(clean_word)
 		print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
+	print(dictionary_prog) #debug
 
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
 		return false
-	if dictionary_prog.has(word):
+	if dictionary_prog.has(word.to_lower()):
 		return true
 	if not dictionary.has(word):
 		return false
 
 	var temp_hand = player_hand.duplicate()
-	print(player_hand)
 	for letter in word:
 		if letter in temp_hand:
 			temp_hand.erase(letter)
@@ -143,7 +152,7 @@ func on_virtual_kbd_pressed(key_letter: String):
 func on_word_submitted():
 	var input_word = $VBoxContainer/WordInput.text.to_upper()
 	if is_word_valid(input_word):
-		if dictionary_prog.has(input_word):
+		if dictionary_prog.has(input_word.to_lower()):
 			$VBoxContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
@@ -156,7 +165,7 @@ func on_word_submitted():
 		
 		var word_score = calculate_score(input_word)
 		score += word_score
-		if dictionary_prog.has(input_word):
+		if dictionary_prog.has(input_word.to_lower()):
 			word_score *= 2
 		score_label.text = "Score: %d" % score
 		remove_used_letters(input_word)
@@ -180,9 +189,5 @@ func calculate_score(word: String) -> int:
 	var word_score := 0
 	for letter in word:
 		word_score += letter_points.get(letter, 0)
-		print("Score added:%d" % word_score + "into %d" % score)
+		#print("Score added:%d" % word_score + "into %d" % score)
 	return word_score
-
-
-func ui_text_submit() -> void:
-	pass # Replace with function body.
