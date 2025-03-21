@@ -1,8 +1,8 @@
 extends Control
 
 var vowels := ['A', 'E', 'I', 'O', 'U']
-var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 
-					'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
+var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
+var letters_all := []
 var player_hand := []
 var dictionary := []
 var dictionary_prog := {}
@@ -28,6 +28,7 @@ var letter_points := {
 
 #INITIAL
 func _ready():
+	letters_all = vowels + consonants
 	draw_initial_hand()
 	update_text_display()
 	load_dictionary()
@@ -54,12 +55,58 @@ func game_over():
 	$VBoxContainer/SubmitButton.disabled = true
 	$VBoxContainer/WordInput.editable = false
 
+# Letters
 func draw_initial_hand():
-	for i in range(10):
-		if i % 2 == 0:
-			player_hand.append(vowels.pick_random())
-		else:
-			player_hand.append(consonants.pick_random())
+	#for i in range(10):
+		#if i % 3 == 0:
+			#player_hand.append(vowels.pick_random())
+		#else:
+			#player_hand.append(consonants.pick_random())
+	letters_all.shuffle()
+	while player_hand.size() < 10 and letters_all.size() > 0:
+		var letter = letters_all.pop_back()
+		player_hand.append(letter)
+	update_text_display()
+
+func draw_letters():
+	letters_all.shuffle
+	vowels.shuffle()
+	var vowel_count = player_hand.count(func(l): vowels.has(l))
+
+	for i in range(4):
+		if player_hand.size() >= 10:
+			break
+		if vowel_count < 2:
+			var letter = vowels.pop_back()
+			if not player_hand.has(letter):
+				player_hand.append(letter)
+				vowel_count += 1
+		elif letters_all.size() > 0:
+			var letter = letters_all.pop_back()
+			if not player_hand.has(letter):
+				player_hand.append(letter)
+	
+	#if player_hand.size() >= 10:
+		#return
+#
+	#for i in range(2): # draw 2 letters; IMPORTANT: vowels first
+		#if player_hand.size() < 20:
+			#player_hand.append(vowels.pick_random())
+		#if player_hand.size() < 20:
+			#player_hand.append(consonants.pick_random())
+	update_text_display()
+
+func remove_used_letters(word: String):
+	for letter in word:
+		player_hand.erase(letter)
+		if not vowels.has(letter):
+			vowels.append(letter)
+		elif not letters_all.has(letter):
+			letters_all.append(letter)
+
+	letters_all.shuffle()
+	vowels.shuffle()
+# Letters
 
 # Update UI
 func update_lives_asset():
@@ -123,26 +170,14 @@ func is_word_valid(word: String) -> bool:
 	if not dictionary.has(word):
 		return false
 
-	var temp_hand = player_hand.duplicate()
+	var temp_hand := player_hand.duplicate()
 	for letter in word:
 		if letter in temp_hand:
-			temp_hand.erase(letter)
+			#temp_hand.erase(letter)
+			continue
 		else:
 			return false
 	return true
-
-func draw_letters():
-	if player_hand.size() >= 20:
-		return
-
-	for i in range(2): # draw 2 letters; IMPORTANT: vowels first
-		if player_hand.size() < 20:
-			player_hand.append(vowels.pick_random())
-		if player_hand.size() < 20:
-			player_hand.append(consonants.pick_random())
-	#TODO: balance?
-
-	update_text_display()
 
 # Buttons
 func on_virtual_kbd_pressed(key_letter: String):
@@ -164,9 +199,9 @@ func on_word_submitted():
 			update_lives_asset()
 		
 		var word_score = calculate_score(input_word)
-		score += word_score
 		if dictionary_prog.has(input_word.to_lower()):
 			word_score *= 2
+		score += word_score
 		score_label.text = "Score: %d" % score
 		remove_used_letters(input_word)
 		draw_letters()
@@ -180,10 +215,6 @@ func on_word_submitted():
 	update_reaction_asset()
 	$VBoxContainer/WordInput.text = ""
 # Button
-
-func remove_used_letters(word: String):
-	for letter in word:
-		player_hand.erase(letter)
 
 func calculate_score(word: String) -> int:
 	var word_score := 0
