@@ -275,6 +275,8 @@ func on_reset_button_pressed():
 # End
 func game_over():
 	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
+	reaction = 3
+	update_reaction_asset()
 	$InputContainer/SubmitButton.disabled = true
 	$InputContainer/WordInput.editable = false
 	$GGButton.hide()

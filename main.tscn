@@ -1,10 +1,11 @@
-[gd_scene load_steps=62 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=63 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
 [ext_resource type="Texture2D" uid="uid://bbju5s5trvicd" path="res://assets/0.png" id="2_vke2r"]
 [ext_resource type="Texture2D" uid="uid://bi4wwfgcl326s" path="res://assets/1.png" id="3_uit24"]
 [ext_resource type="Texture2D" uid="uid://b78syonvfwue4" path="res://assets/2.png" id="4_ruth0"]
+[ext_resource type="Texture2D" uid="uid://bxvj36sgocod6" path="res://assets/3.png" id="5_pjyto"]
 [ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="5_rm4vd"]
 [ext_resource type="Texture2D" uid="uid://b1xnyysoxf06b" path="res://assets/keyboard/normal/L. Key 1.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://dgqcibnwmksqe" path="res://assets/keyboard/normal/L. Key 17.png" id="6_ok6jj"]
@@ -73,7 +74,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ig7tw")
-reaction_texture = Array[Texture2D]([ExtResource("2_vke2r"), ExtResource("3_uit24"), ExtResource("4_ruth0")])
+reaction_texture = Array[Texture2D]([ExtResource("2_vke2r"), ExtResource("3_uit24"), ExtResource("4_ruth0"), ExtResource("5_pjyto")])
 heart_texture = ExtResource("5_rm4vd")
 
 [node name="LettersContainer" type="HBoxContainer" parent="Control"]
