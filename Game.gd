@@ -32,6 +32,8 @@ func _ready():
 	update_text_display()
 	load_dictionary()
 	update_lives_asset()
+	var keyboard = get_node("/root/Main/KeyboardControl")
+	keyboard.key_press.connect(on_virtual_kbd_pressed)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -88,8 +90,8 @@ func load_dictionary():
 	var file_eng = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
 	if file_eng:
 		var content = file_eng.get_as_text().strip_edges().to_upper()
-		for word in content.split(","):
-			var clean_word = word.strip_edges()
+		for word in content.split("\n"):
+			var clean_word = word.strip_edges().replace('"','')
 			if clean_word != "":
 				dictionary.append(clean_word)
 		print("Dictionary loaded with %d words" % dictionary.size())
@@ -106,6 +108,8 @@ func load_dictionary():
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
 		return false
+	if dictionary_prog.has(word):
+		return true
 	if not dictionary.has(word):
 		return false
 
@@ -130,6 +134,11 @@ func draw_letters():
 	#TODO: balance?
 
 	update_text_display()
+
+# Buttons
+func on_virtual_kbd_pressed(key_letter: String):
+	var letter = key_letter.replace("Button","").to_lower()
+	$VBoxContainer/WordInput.text += letter;
 
 func on_word_submitted():
 	var input_word = $VBoxContainer/WordInput.text.to_upper()
@@ -156,11 +165,12 @@ func on_word_submitted():
 		if lives <= 0:
 			game_over()
 	else:
-		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Word!"
+		$VBoxContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
 		reaction = 2;
 	update_text_display()
 	update_reaction_asset()
 	$VBoxContainer/WordInput.text = ""
+# Button
 
 func remove_used_letters(word: String):
 	for letter in word:
