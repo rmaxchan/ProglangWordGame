@@ -17,13 +17,15 @@ var letter_points := {
 	'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4,
 	'Z': 10
 }
+var letter_textures := {}
 
-@onready var letters_container = $InputContainer/LettersContainer
+@onready var letters_container = $LettersContainer
 @onready var score_label = $InputContainer/ScoreLabel
 @onready var lives_container = $LivesContainer
 @onready var reaction_image = $ReactionImage
 @onready var last_word_label = $DefContainer/LastWordLabel
 @onready var definition_label = $DefContainer/DefinitionLabel
+@onready var gg_button = $GGButton
 
 @export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
@@ -32,13 +34,12 @@ var letter_points := {
 #INITIAL
 func _ready():
 	letters_all = vowels + consonants
+	load_letter_textures()
 	draw_initial_hand()
-	update_text_display()
 	load_dictionary()
 	update_lives_asset()
 	var keyboard = get_node("/root/Main/KeyboardControl")
 	keyboard.key_press.connect(on_virtual_kbd_pressed)
-	
 	last_word_label.text = "Your last input shows up here"
 	#definition_label.text = "Programming terms are defined here"
 
@@ -46,20 +47,6 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 			on_word_submitted()
-
-func setup_lives_display():
-	lives_container.clear_children()
-	for i in range(3):
-		var heart_texture = TextureRect.new()
-		heart_texture.texture = load("res://assets/heart64.png")
-		heart_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-		heart_texture.custom_minimum_size = Vector2(64,64)
-		lives_container.add_child(heart_texture)
-
-func game_over():
-	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
-	$InputContainer/SubmitButton.disabled = true
-	$InputContainer/WordInput.editable = false
 
 # Letters
 func draw_initial_hand():
@@ -145,9 +132,13 @@ func update_text_display():
 		child.queue_free()
 	
 	for letter in player_hand:
-		var letter_label = Label.new()
-		letter_label.text = letter
-		letters_container.add_child(letter_label)
+		if letter_textures.has(letter):
+			var letter_texture = TextureRect.new()
+			letter_texture.texture = letter_textures[letter.to_upper()]
+			letter_texture.custom_minimum_size = Vector2(15, 15)
+			letters_container.add_child(letter_texture)
+		else:
+			print("Texture not found for letter: %s" % letter)
 
 func update_last_word_display(input_word: String):
 	if dictionary_prog.has(input_word):
@@ -158,6 +149,7 @@ func update_last_word_display(input_word: String):
 	definition_label.queue_redraw()
 # Update UI
 
+# Load Assets
 func load_dictionary():
 	var file_eng = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
 	if file_eng:
@@ -189,6 +181,27 @@ func load_dictionary():
 		print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
 	#print(dictionary_prog) #debug
 
+func load_letter_textures():
+	for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+		if ResourceLoader.exists("res://assets/letters/" + letter + ".png"):
+			#print("Path exists:", ResourceLoader.exists("res://assets/letters/" + letter + ".png"))
+			letter_textures[letter] = load("res://assets/letters/" + letter + ".png")
+			#print("res://assets/letters/" + letter + ".png added!" )
+		else:
+			print("Missing textures for %s" %letter)
+
+func setup_lives_display():
+	lives_container.clear_children()
+	for i in range(3):
+		var heart_texture = TextureRect.new()
+		heart_texture.texture = load("res://assets/heart64.png")
+		heart_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+		heart_texture.custom_minimum_size = Vector2(64,64)
+		lives_container.add_child(heart_texture)
+
+# Load Assets
+
+# Game Logic
 func is_word_valid(word: String) -> bool:
 	if word.length() < 3:
 		return false
@@ -205,6 +218,14 @@ func is_word_valid(word: String) -> bool:
 		else:
 			return false
 	return true
+
+func calculate_score(word: String) -> int:
+	var word_score := 0
+	for letter in word:
+		word_score += letter_points.get(letter, 0)
+		#print("Score added:%d" % word_score + "into %d" % score)
+	return word_score
+# Game Logic
 
 # Buttons
 func on_virtual_kbd_pressed(key_letter: String):
@@ -243,11 +264,27 @@ func on_word_submitted():
 	update_text_display()
 	update_reaction_asset()
 	$InputContainer/WordInput.text = ""
+
+func on_gg_button_pressed():
+	game_over()
+
+func on_reset_button_pressed():
+	reset_game()
 # Button
 
-func calculate_score(word: String) -> int:
-	var word_score := 0
-	for letter in word:
-		word_score += letter_points.get(letter, 0)
-		#print("Score added:%d" % word_score + "into %d" % score)
-	return word_score
+# End
+func game_over():
+	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
+	$InputContainer/SubmitButton.disabled = true
+	$InputContainer/WordInput.editable = false
+	$GGButton.hide()
+	$ResetButton.show()
+
+func reset_game():
+	score = 0
+	lives = 3
+	#$VBoxContainer/SubmitButton.disabled = false
+	#$VBoxContainer/WordInput.editable = true
+	score_label.text = "Score: 0"
+	get_tree().reload_current_scene()
+# End

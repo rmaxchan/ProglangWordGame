@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=62 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b8u24lq4eo0ky" path="res://assets/heart32.png" id="5_rm4vd"]
 [ext_resource type="Texture2D" uid="uid://b1xnyysoxf06b" path="res://assets/keyboard/normal/L. Key 1.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://dgqcibnwmksqe" path="res://assets/keyboard/normal/L. Key 17.png" id="6_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://mjlbwkfr8ci" path="res://assets/flag.png" id="6_uit24"]
 [ext_resource type="Texture2D" uid="uid://c7xbv5x3x45e8" path="res://assets/keyboard/pressed/L. Key 1.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://5mn0ignb3pak" path="res://assets/keyboard/pressed/L. Key 17.png" id="7_facbu"]
+[ext_resource type="Texture2D" uid="uid://bb5y6sjhl71" path="res://assets/reset.png" id="7_ruth0"]
 [ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
 [ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://mxfwmsbd5s0s" path="res://assets/keyboard/normal/L. Key 18.png" id="12_0cp0l"]
@@ -74,6 +76,14 @@ script = ExtResource("1_ig7tw")
 reaction_texture = Array[Texture2D]([ExtResource("2_vke2r"), ExtResource("3_uit24"), ExtResource("4_ruth0")])
 heart_texture = ExtResource("5_rm4vd")
 
+[node name="LettersContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 310.0
+offset_top = 253.0
+offset_right = 787.0
+offset_bottom = 253.0
+scale = Vector2(1.49, 1.49)
+
 [node name="InputContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 312.0
@@ -86,9 +96,6 @@ alignment = 1
 layout_mode = 2
 text = "Score:"
 
-[node name="LettersContainer" type="HBoxContainer" parent="Control/InputContainer"]
-layout_mode = 2
-
 [node name="WordInput" type="LineEdit" parent="Control/InputContainer"]
 layout_mode = 2
 placeholder_text = "Start typing here..."
@@ -99,6 +106,7 @@ virtual_keyboard_enabled = false
 [node name="SubmitButton" type="Button" parent="Control/InputContainer"]
 layout_mode = 2
 text = "Submit"
+icon_alignment = 1
 
 [node name="FeedbackLabel" type="Label" parent="Control/InputContainer"]
 layout_mode = 2
@@ -147,6 +155,25 @@ layout_mode = 2
 text = "The definitions show up here"
 fit_content = true
 autowrap_mode = 2
+
+[node name="GGButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 584.0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture_normal = ExtResource("6_uit24")
+stretch_mode = 1
+
+[node name="ResetButton" type="TextureButton" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 576.0
+texture_normal = ExtResource("7_ruth0")
+stretch_mode = 1
 
 [node name="KeyboardControl" type="Control" parent="."]
 layout_mode = 3
@@ -344,3 +371,5 @@ texture_pressed = ExtResource("57_gx4rg")
 
 [connection signal="button_down" from="Control/InputContainer/SubmitButton" to="Control" method="ui_text_submit"]
 [connection signal="pressed" from="Control/InputContainer/SubmitButton" to="Control" method="on_word_submitted"]
+[connection signal="pressed" from="Control/GGButton" to="Control" method="on_gg_button_pressed"]
+[connection signal="pressed" from="Control/ResetButton" to="Control" method="on_reset_button_pressed"]
