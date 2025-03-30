@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=65 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xbv5x3x45e8" path="res://assets/keyboard/pressed/L. Key 1.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://5mn0ignb3pak" path="res://assets/keyboard/pressed/L. Key 17.png" id="7_facbu"]
 [ext_resource type="Texture2D" uid="uid://bb5y6sjhl71" path="res://assets/reset.png" id="7_ruth0"]
+[ext_resource type="Texture2D" uid="uid://cfevgpfjvi5ar" path="res://assets/shop-icon.png" id="9_pjyto"]
 [ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
 [ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://mxfwmsbd5s0s" path="res://assets/keyboard/normal/L. Key 18.png" id="12_0cp0l"]
@@ -63,6 +64,13 @@
 [ext_resource type="Texture2D" uid="uid://dxwt7w1j21du0" path="res://assets/keyboard/pressed/L. Key 13.png" id="57_gx4rg"]
 
 [sub_resource type="Theme" id="Theme_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4vd"]
+bg_color = Color(0.24512, 0.2048, 0.32, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Main" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [341.0]
@@ -131,7 +139,7 @@ offset_right = 296.0
 offset_bottom = 408.0
 
 [node name="Line2D" type="Line2D" parent="Control"]
-position = Vector2(805, 41)
+position = Vector2(5.35983, 34)
 scale = Vector2(1.35983, 1.25)
 points = PackedVector2Array(1, -1, 236, -1)
 width = 2.0
@@ -142,10 +150,10 @@ end_cap_mode = 1
 
 [node name="DefContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 806.0
-offset_top = 14.0
-offset_right = 1105.0
-offset_bottom = 112.0
+offset_left = 6.35983
+offset_top = 7.0
+offset_right = 305.36
+offset_bottom = 105.0
 
 [node name="LastWordLabel" type="Label" parent="Control/DefContainer"]
 layout_mode = 2
@@ -175,6 +183,77 @@ offset_right = 1152.0
 offset_bottom = 576.0
 texture_normal = ExtResource("7_ruth0")
 stretch_mode = 1
+
+[node name="TurnCountContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 850.0
+offset_top = 3.0
+offset_right = 1103.0
+offset_bottom = 26.0
+scale = Vector2(1.00281, 1.13263)
+
+[node name="TurnCount" type="Label" parent="Control/TurnCountContainer"]
+layout_mode = 2
+text = "Turns left before shop appears: 2"
+
+[node name="ShopButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 34.0
+offset_right = 1134.0
+offset_bottom = 65.0
+disabled = true
+text = "shop"
+
+[node name="ShopPanel" type="Panel" parent="Control/ShopButton"]
+visible = false
+layout_mode = 0
+offset_left = -353.0
+offset_top = 38.0
+offset_right = 47.0
+offset_bottom = 238.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rm4vd")
+
+[node name="ItemPanel" type="Panel" parent="Control/ShopButton/ShopPanel"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 27.0
+offset_right = 125.0
+offset_bottom = 127.0
+
+[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel"]
+layout_mode = 1
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(4.23146, 4.17393)
+icon = ExtResource("9_pjyto")
+flat = true
+
+[node name="ItemPanel2" type="Panel" parent="Control/ShopButton/ShopPanel"]
+offset_left = 150.0
+offset_top = 28.0
+offset_right = 250.0
+offset_bottom = 128.0
+
+[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(4.23146, 4.17393)
+icon = ExtResource("9_pjyto")
+flat = true
+
+[node name="ItemPanel3" type="Panel" parent="Control/ShopButton/ShopPanel"]
+offset_left = 275.0
+offset_top = 27.0
+offset_right = 375.0
+offset_bottom = 127.0
+
+[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(4.25688, 4.17393)
+icon = ExtResource("9_pjyto")
+flat = true
 
 [node name="KeyboardControl" type="Control" parent="."]
 layout_mode = 3
@@ -374,3 +453,4 @@ texture_pressed = ExtResource("57_gx4rg")
 [connection signal="pressed" from="Control/InputContainer/SubmitButton" to="Control" method="on_word_submitted"]
 [connection signal="pressed" from="Control/GGButton" to="Control" method="on_gg_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="Control" method="on_reset_button_pressed"]
+[connection signal="pressed" from="Control/ShopButton" to="Control" method="_on_shop_button_pressed"]
