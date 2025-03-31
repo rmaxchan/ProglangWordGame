@@ -18,6 +18,8 @@ var letter_points := {
 	'Z': 10
 }
 var letter_textures := {}
+var turn_count := 0
+const SHOP_INTERVAL := 2
 
 @onready var letters_container = $LettersContainer
 @onready var score_label = $InputContainer/ScoreLabel
@@ -25,7 +27,10 @@ var letter_textures := {}
 @onready var reaction_image = $ReactionImage
 @onready var last_word_label = $DefContainer/LastWordLabel
 @onready var definition_label = $DefContainer/DefinitionLabel
+@onready var turn_count_label = $TurnCountContainer/TurnCount
 @onready var gg_button = $GGButton
+@onready var shop_button = $ShopButton
+@onready var shop_panel = $ShopButton/ShopPanel
 
 @export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
@@ -42,6 +47,7 @@ func _ready():
 	keyboard.key_press.connect(on_virtual_kbd_pressed)
 	last_word_label.text = "Your last input shows up here"
 	#definition_label.text = "Programming terms are defined here"
+
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -235,6 +241,8 @@ func on_word_submitted():
 	var input_word = $InputContainer/WordInput.text.to_upper()
 	last_word_label.text = "Last input: %s" % input_word
 	if is_word_valid(input_word):
+		update_shop_countdown()
+		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
 			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
@@ -264,6 +272,7 @@ func on_word_submitted():
 	update_reaction_asset()
 	$InputContainer/WordInput.text = ""
 
+
 func on_gg_button_pressed():
 	game_over()
 
@@ -284,8 +293,26 @@ func game_over():
 func reset_game():
 	score = 0
 	lives = 3
+	turn_count = 0
 	#$VBoxContainer/SubmitButton.disabled = false
 	#$VBoxContainer/WordInput.editable = true
 	score_label.text = "Score: 0"
 	get_tree().reload_current_scene()
 # End
+
+func _on_shop_button_pressed():
+	shop_panel.visible = !shop_panel.visible
+
+func enable_shop():
+	shop_button.disabled = true
+	print(turn_count)
+	print(SHOP_INTERVAL)
+	print(turn_count % SHOP_INTERVAL)
+	if (turn_count != 0):
+		if (turn_count % SHOP_INTERVAL == 0):
+			shop_button.disabled = false
+
+func update_shop_countdown():
+	turn_count += 1
+	var turns_left := SHOP_INTERVAL - (turn_count % SHOP_INTERVAL)
+	turn_count_label.text = "Turn left until the shop appears: %s" % turns_left
