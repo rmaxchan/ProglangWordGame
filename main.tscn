@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=77 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xbv5x3x45e8" path="res://assets/keyboard/pressed/L. Key 1.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://5mn0ignb3pak" path="res://assets/keyboard/pressed/L. Key 17.png" id="7_facbu"]
 [ext_resource type="Texture2D" uid="uid://bb5y6sjhl71" path="res://assets/reset.png" id="7_ruth0"]
+[ext_resource type="FontFile" uid="uid://bsppnpuk4ew0h" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="8_b17eg"]
 [ext_resource type="Texture2D" uid="uid://cfevgpfjvi5ar" path="res://assets/shop-icon.png" id="9_pjyto"]
 [ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
 [ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
@@ -175,10 +176,12 @@ alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control/InputContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Score:"
 
 [node name="WordInput" type="LineEdit" parent="Control/InputContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 placeholder_text = "Start typing here..."
 keep_editing_on_text_submit = true
 emoji_menu_enabled = false
@@ -186,6 +189,7 @@ virtual_keyboard_enabled = false
 
 [node name="SubmitButton" type="Button" parent="Control/InputContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Submit"
 icon_alignment = 1
 
@@ -211,9 +215,9 @@ offset_right = 296.0
 offset_bottom = 408.0
 
 [node name="Line2D" type="Line2D" parent="Control"]
-position = Vector2(5.35983, 34)
+position = Vector2(5.35983, 31)
 scale = Vector2(1.35983, 1.25)
-points = PackedVector2Array(1, -1, 236, -1)
+points = PackedVector2Array(1, -1, 221.838, -1, 236, -1)
 width = 2.0
 default_color = Color(0.489622, 0.489622, 0.489622, 1)
 joint_mode = 2
@@ -230,6 +234,7 @@ offset_left = 503.0
 offset_top = 613.0
 offset_right = 564.0
 offset_bottom = 636.0
+theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Coins: 0"
 
 [node name="DefContainer" type="VBoxContainer" parent="Control"]
@@ -241,10 +246,12 @@ offset_bottom = 105.0
 
 [node name="LastWordLabel" type="Label" parent="Control/DefContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Your last input shows up here"
 
 [node name="DefinitionLabel" type="RichTextLabel" parent="Control/DefContainer"]
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("8_b17eg")
 text = "Programming definitions show up here"
 fit_content = true
 autowrap_mode = 2
@@ -270,14 +277,15 @@ stretch_mode = 1
 
 [node name="TurnCountContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 2
-offset_left = 850.0
-offset_top = 3.0
-offset_right = 1103.0
-offset_bottom = 26.0
+offset_left = 872.0
+offset_top = 8.0
+offset_right = 1137.0
+offset_bottom = 31.0
 scale = Vector2(1.00281, 1.13263)
 
 [node name="TurnCount" type="Label" parent="Control/TurnCountContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Turns left before shop appears: 2"
 
 [node name="ShopButton" type="Button" parent="Control"]
@@ -286,6 +294,7 @@ offset_left = 1088.0
 offset_top = 34.0
 offset_right = 1134.0
 offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("8_b17eg")
 disabled = true
 text = "Shop"
 
