@@ -1,6 +1,7 @@
 extends Control
 
 var vowels := ['A', 'E', 'I', 'O', 'U']
+var vowels_master := ['A', 'E', 'I', 'O', 'U']
 var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
 var letters_all := []
 var player_hand := []
@@ -79,22 +80,26 @@ func draw_initial_hand():
 
 func draw_letters():
 	var vowel_count = player_hand.count(func(l): vowels.has(l))
-
+	vowels = vowels_master.duplicate()
+	#var letters_drawn = 0
+	
 	for i in range(5):
 		letters_all.shuffle()
 		if player_hand.size() >= 10:
 			break
 		if vowel_count < 3:
 			vowels.shuffle()
-			print("vowel count is %d" % vowel_count)
+			#print("vowel count is %d" % vowel_count)
 			var letter = vowels.pop_back()
-			if not player_hand.has(letter):
+			if vowels_master.has(letter) and not player_hand.has(letter):
 				player_hand.append(letter)
+				#letters_drawn += 1
 				vowel_count += 1
 		else:
 			var letter = letters_all.pop_back()
 			if not player_hand.has(letter):
 				player_hand.append(letter)
+				#letters_drawn += 1
 	
 	#if player_hand.size() >= 10:
 		#return
@@ -116,6 +121,7 @@ func remove_used_letters(word: String):
 
 	letters_all.shuffle()
 	vowels.shuffle()
+	#print(vowels)
 # Letters
 
 # Update UI

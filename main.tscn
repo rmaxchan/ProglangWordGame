@@ -230,12 +230,14 @@ icon = ExtResource("9_pjyto")
 flat = true
 
 [node name="ItemPanel2" type="Panel" parent="Control/ShopButton/ShopPanel"]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 28.0
 offset_right = 250.0
 offset_bottom = 128.0
 
 [node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
 scale = Vector2(4.23146, 4.17393)
@@ -243,12 +245,14 @@ icon = ExtResource("9_pjyto")
 flat = true
 
 [node name="ItemPanel3" type="Panel" parent="Control/ShopButton/ShopPanel"]
+layout_mode = 0
 offset_left = 275.0
 offset_top = 27.0
 offset_right = 375.0
 offset_bottom = 127.0
 
 [node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
 scale = Vector2(4.25688, 4.17393)
