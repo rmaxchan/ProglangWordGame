@@ -141,3 +141,6 @@ moore,"Refers to Gordon Moore, co-founder of Intel and author of Moore's Law pre
 davis,"Refers to Terrence Andrew Davis, a controversial electrical engineer and programmer who developed and designed TempleOS released in 2013."
 script,"An automated series of instructions carried out in a specific order for computing systems."
 jobs,"Refers to Steve jobs, co-founder of Apple in 1976."
+query,"An SQL instruction or request to fetch information from a database."
+hack,"The act of compromising digital devices and networks by gaining unauthorized access to an account or computer system."
+queue,"A sequence of entities or instructions waiting on an available process or resource."

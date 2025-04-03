@@ -3,11 +3,15 @@ extends Control
 var vowels := ['A', 'E', 'I', 'O', 'U']
 var vowels_master := ['A', 'E', 'I', 'O', 'U']
 var consonants := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
+var consonants_master := ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
 var letters_all := []
 var player_hand := []
 var dictionary := []
 var dictionary_prog := {}
 var score := 0
+var coins := 0
+var coins_goal := 20
+
 var lives := 3
 var reaction := 0
 var letter_points := {
@@ -32,28 +36,30 @@ const SHOP_INTERVAL := 2
 @onready var gg_button = $GGButton
 @onready var shop_button = $ShopButton
 @onready var shop_panel = $ShopButton/ShopPanel
+@onready var coins_label = $CoinLabel
+@onready var coin_anim = $CoinSprite
 
 @export var reaction_texture: Array[Texture2D]
 @export var heart_texture: Texture2D
 @export var key_button: Dictionary = {}
 
-#INITIAL
+# INITIAL
 func _ready():
+	var keyboard = get_node("/root/Main/KeyboardControl")
+	keyboard.key_press.connect(on_virtual_kbd_pressed)
+	coin_anim.play("Spin")
+	
 	letters_all = vowels + consonants
 	load_letter_textures()
 	draw_initial_hand()
 	load_dictionary()
 	update_lives_asset()
-	var keyboard = get_node("/root/Main/KeyboardControl")
-	keyboard.key_press.connect(on_virtual_kbd_pressed)
-	last_word_label.text = "Your last input shows up here"
-	#definition_label.text = "Programming terms are defined here"
-
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 			on_word_submitted()
+# INITIAL
 
 # Letters
 func draw_initial_hand():
@@ -79,48 +85,44 @@ func draw_initial_hand():
 	update_text_display()
 
 func draw_letters():
-	var vowel_count = player_hand.count(func(l): vowels.has(l))
 	vowels = vowels_master.duplicate()
-	#var letters_drawn = 0
+	consonants = consonants_master.duplicate()
+	letters_all = vowels + consonants
+	var vowel_count = player_hand.count(func(l): vowels.has(l))
+	var letters_drawn = 0
 	
-	for i in range(5):
-		letters_all.shuffle()
+	while letters_drawn < 4:
 		if player_hand.size() >= 10:
 			break
-		if vowel_count < 3:
+		if vowel_count < 2 and vowels.size() > 0:
 			vowels.shuffle()
-			#print("vowel count is %d" % vowel_count)
 			var letter = vowels.pop_back()
-			if vowels_master.has(letter) and not player_hand.has(letter):
+			if not player_hand.has(letter):
 				player_hand.append(letter)
-				#letters_drawn += 1
+				letters_drawn += 1
 				vowel_count += 1
-		else:
+				continue
+		elif letters_all.size() > 0:
+			letters_all.shuffle()
 			var letter = letters_all.pop_back()
 			if not player_hand.has(letter):
 				player_hand.append(letter)
-				#letters_drawn += 1
+				letters_drawn += 1
+		else:
+			break
 	
-	#if player_hand.size() >= 10:
-		#return
-#
-	#for i in range(2): # draw 2 letters; IMPORTANT: vowels first
-		#if player_hand.size() < 20:
-			#player_hand.append(vowels.pick_random())
-		#if player_hand.size() < 20:
-			#player_hand.append(consonants.pick_random())
 	update_text_display()
 
 func remove_used_letters(word: String):
 	for letter in word:
 		player_hand.erase(letter)
-		if not vowels.has(letter):
-			vowels.append(letter)
-		elif not letters_all.has(letter):
-			letters_all.append(letter)
-
-	letters_all.shuffle()
-	vowels.shuffle()
+		#if not vowels.has(letter):
+			#vowels.append(letter)
+		#elif not letters_all.has(letter):
+			#letters_all.append(letter)
+#
+	#letters_all.shuffle()
+	#vowels.shuffle()
 	#print(vowels)
 # Letters
 
@@ -236,6 +238,12 @@ func calculate_score(word: String) -> int:
 		word_score += letter_points.get(letter, 0)
 		#print("Score added:%d" % word_score + "into %d" % score)
 	return word_score
+
+func update_coins():
+	if score >= coins_goal:
+		coins += 1
+		coins_goal += 20
+		coins_label.text = "Coins: %d" % coins
 # Game Logic
 
 # Buttons
@@ -266,6 +274,7 @@ func on_word_submitted():
 			word_score *= 2
 		score += word_score
 		score_label.text = "Score: %d" % score
+		update_coins()
 		remove_used_letters(input_word)
 		draw_letters()
 		
@@ -277,7 +286,6 @@ func on_word_submitted():
 	update_text_display()
 	update_reaction_asset()
 	$InputContainer/WordInput.text = ""
-
 
 func on_gg_button_pressed():
 	game_over()

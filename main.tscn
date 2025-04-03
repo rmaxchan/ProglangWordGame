@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=76 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
@@ -62,8 +62,80 @@
 [ext_resource type="Texture2D" uid="uid://djbo4ermgq4gi" path="res://assets/keyboard/pressed/L. Key 14.png" id="55_c2n8d"]
 [ext_resource type="Texture2D" uid="uid://ctus31x8r5y1" path="res://assets/keyboard/normal/L. Key 13.png" id="56_wy5fy"]
 [ext_resource type="Texture2D" uid="uid://dxwt7w1j21du0" path="res://assets/keyboard/pressed/L. Key 13.png" id="57_gx4rg"]
+[ext_resource type="Texture2D" uid="uid://dsyjbs5va70km" path="res://assets/coins.png" id="63_sm6fg"]
 
 [sub_resource type="Theme" id="Theme_ig7tw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b17eg"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntx8l"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uatky"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqtf5"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vm84"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu3dr"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyx1q"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dhbp"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(140, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx0wj"]
+atlas = ExtResource("63_sm6fg")
+region = Rect2(160, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kkkcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b17eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntx8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uatky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqtf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vm84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu3dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyx1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dhbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx0wj")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 10.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4vd"]
 bg_color = Color(0.24512, 0.2048, 0.32, 1)
@@ -148,6 +220,18 @@ joint_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 1
 
+[node name="CoinSprite" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(488, 624)
+sprite_frames = SubResource("SpriteFrames_kkkcx")
+animation = &"Spin"
+
+[node name="CoinLabel" type="Label" parent="Control"]
+offset_left = 503.0
+offset_top = 613.0
+offset_right = 564.0
+offset_bottom = 636.0
+text = "Coins: 0"
+
 [node name="DefContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 6.35983
@@ -161,7 +245,7 @@ text = "Your last input shows up here"
 
 [node name="DefinitionLabel" type="RichTextLabel" parent="Control/DefContainer"]
 layout_mode = 2
-text = "The definitions show up here"
+text = "Programming definitions show up here"
 fit_content = true
 autowrap_mode = 2
 
@@ -203,7 +287,7 @@ offset_top = 34.0
 offset_right = 1134.0
 offset_bottom = 65.0
 disabled = true
-text = "shop"
+text = "Shop"
 
 [node name="ShopPanel" type="Panel" parent="Control/ShopButton"]
 visible = false
