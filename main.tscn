@@ -1,6 +1,7 @@
-[gd_scene load_steps=77 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=78 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://c4qlgjd4a7o0l" path="res://assets/background.png" id="1_ntx8l"]
 [ext_resource type="Script" uid="uid://c1x3nqxt5essx" path="res://VirtualKeyboard.gd" id="2_6iyjs"]
 [ext_resource type="Texture2D" uid="uid://bbju5s5trvicd" path="res://assets/0.png" id="2_vke2r"]
 [ext_resource type="Texture2D" uid="uid://bi4wwfgcl326s" path="res://assets/1.png" id="3_uit24"]
@@ -149,6 +150,11 @@ corner_radius_bottom_left = 5
 metadata/_edit_horizontal_guides_ = [341.0]
 metadata/_edit_vertical_guides_ = [550.0]
 
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1154.0
+offset_bottom = 650.0
+texture = ExtResource("1_ntx8l")
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -160,10 +166,10 @@ heart_texture = ExtResource("5_rm4vd")
 
 [node name="LettersContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 2
-offset_left = 310.0
-offset_top = 253.0
-offset_right = 787.0
-offset_bottom = 253.0
+offset_left = 316.0
+offset_top = 255.0
+offset_right = 793.0
+offset_bottom = 255.0
 scale = Vector2(1.49, 1.49)
 
 [node name="InputContainer" type="VBoxContainer" parent="Control"]
@@ -195,24 +201,26 @@ icon_alignment = 1
 
 [node name="FeedbackLabel" type="Label" parent="Control/InputContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_b17eg")
 
 [node name="LivesContainer" type="HBoxContainer" parent="Control"]
 visibility_layer = 3
 layout_mode = 0
-offset_left = 375.0
-offset_top = 408.0
-offset_right = 558.0
-offset_bottom = 465.0
+offset_left = 825.0
+offset_top = 440.0
+offset_right = 1008.0
+offset_bottom = 497.0
 theme = SubResource("Theme_ig7tw")
 alignment = 1
 
 [node name="ReactionImage" type="TextureRect" parent="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 176.0
-offset_top = 288.0
-offset_right = 296.0
-offset_bottom = 408.0
+offset_left = 448.0
+offset_top = 464.0
+offset_right = 568.0
+offset_bottom = 584.0
+scale = Vector2(1.25, 1.25)
 
 [node name="Line2D" type="Line2D" parent="Control"]
 position = Vector2(5.35983, 31)
@@ -225,15 +233,16 @@ begin_cap_mode = 1
 end_cap_mode = 1
 
 [node name="CoinSprite" type="AnimatedSprite2D" parent="Control"]
-position = Vector2(488, 624)
+position = Vector2(987, 475)
 sprite_frames = SubResource("SpriteFrames_kkkcx")
 animation = &"Spin"
 
 [node name="CoinLabel" type="Label" parent="Control"]
-offset_left = 503.0
-offset_top = 613.0
-offset_right = 564.0
-offset_bottom = 636.0
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 464.0
+offset_right = 1063.0
+offset_bottom = 487.0
 theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Coins: 0"
 
@@ -355,10 +364,11 @@ flat = true
 [node name="KeyboardControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 384.0
-offset_top = 408.0
-offset_right = 424.0
-offset_bottom = 448.0
+offset_left = 669.0
+offset_top = 453.0
+offset_right = 709.0
+offset_bottom = 493.0
+scale = Vector2(1.095, 1.095)
 script = ExtResource("2_6iyjs")
 
 [node name="KBDContainerTop" type="HBoxContainer" parent="KeyboardControl"]
