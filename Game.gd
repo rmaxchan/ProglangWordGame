@@ -196,7 +196,7 @@ func load_dictionary():
 	#print(dictionary_prog) #debug
 
 func load_letter_textures():
-	for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+	for letter in "+ABCDEFGHIJKLMNOPQRSTUVWXYZ":
 		if ResourceLoader.exists("res://assets/letters/" + letter + ".png"):
 			#print("Path exists:", ResourceLoader.exists("res://assets/letters/" + letter + ".png"))
 			letter_textures[letter] = load("res://assets/letters/" + letter + ".png")
@@ -223,6 +223,9 @@ func is_word_valid(word: String) -> bool:
 	for letter in word:
 		if letter in temp_hand:
 			#temp_hand.erase(letter)
+			continue
+		elif "+" in temp_hand:
+			#temp_hand.erase("+")
 			continue
 		else:
 			return false
@@ -258,11 +261,13 @@ func on_word_submitted():
 		update_shop_countdown()
 		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
+			#show_message("🎉 Proggers! Score doubled and lives restored!", 3.0)
 			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
 			update_lives_asset()
 		else:
+			#show_message("✅ Word accepted but is not Proggers! -1 Heart!",3.0)
 			$InputContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
 			reaction = 0;
 			lives -= 1;
@@ -281,6 +286,7 @@ func on_word_submitted():
 		if lives <= 0:
 			game_over()
 	else:
+		#show_message("❌ Invalid Input! Try checking your letters.", 3.0)
 		$InputContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
 		reaction = 2;
 	update_text_display()
@@ -296,6 +302,7 @@ func on_reset_button_pressed():
 
 # End
 func game_over():
+	#show_message("💀 Skill Issue! 🗿 Final Score: %d" % score, 3.0)
 	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
 	reaction = 3
 	update_reaction_asset()
@@ -319,14 +326,50 @@ func _on_shop_button_pressed():
 
 func enable_shop():
 	shop_button.disabled = true
-	print(turn_count)
-	print(SHOP_INTERVAL)
-	print(turn_count % SHOP_INTERVAL)
 	if (turn_count != 0):
 		if (turn_count % SHOP_INTERVAL == 0):
 			shop_button.disabled = false
+		else:
+			shop_panel.visible = false
 
 func update_shop_countdown():
 	turn_count += 1
 	var turns_left := SHOP_INTERVAL - (turn_count % SHOP_INTERVAL)
 	turn_count_label.text = "Turn left until the shop appears: %s" % turns_left
+
+
+func _on_add_heart_button_pressed() -> void:
+	if(coins >= 2):
+		lives = 3
+		update_lives_asset()
+		coins =- 3
+		show_message("You've restored your lives",2.0)
+	else: 
+		show_message("❗Not Enough Coins❗",2.0)  
+
+func _on_wild_card_pressed() -> void:
+	if(coins >= 1):
+		player_hand.append("+")
+		update_text_display()
+		coins =- 3
+		show_message("You've activated Wildcard buff",2.0)
+	else: 
+		show_message("❗Not Enough Coins❗",2.0) 
+
+#letter burst buff
+func _on_shuffle_letter_pressed() -> void:
+	if(coins >= 3):
+		draw_initial_hand()
+		coins =- 3
+		print("pressed")
+		show_message("You've activated Letter Burst buff",2.0)
+	else: 
+		show_message("❗Not Enough Coins❗",2.0) 
+
+func _on_timer_timeout() -> void:
+	$InputContainer/FeedbackLabel.text = ""
+
+func show_message(text: String, duration: float = 2.0):
+	$InputContainer/FeedbackLabel.text = text
+	$InputContainer/FeedbackLabel.visible = true
+	$InputContainer/FeedbackLabel/HideTimer.start(duration)

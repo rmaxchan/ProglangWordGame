@@ -204,6 +204,10 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_b17eg")
 
+[node name="HideTimer" type="Timer" parent="Control/InputContainer/FeedbackLabel"]
+wait_time = 2.0
+one_shot = true
+
 [node name="LivesContainer" type="HBoxContainer" parent="Control"]
 visibility_layer = 3
 layout_mode = 0
@@ -323,7 +327,7 @@ layout_mode = 0
 offset_left = -353.0
 offset_top = 38.0
 offset_right = 47.0
-offset_bottom = 238.0
+offset_bottom = 200.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rm4vd")
 
 [node name="ItemPanel" type="Panel" parent="Control/ShopButton/ShopPanel"]
@@ -333,7 +337,7 @@ offset_top = 27.0
 offset_right = 125.0
 offset_bottom = 127.0
 
-[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel"]
+[node name="AddHeartButton" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel"]
 layout_mode = 1
 offset_right = 24.0
 offset_bottom = 24.0
@@ -348,7 +352,7 @@ offset_top = 28.0
 offset_right = 250.0
 offset_bottom = 128.0
 
-[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
+[node name="WildCard" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
@@ -363,7 +367,7 @@ offset_top = 27.0
 offset_right = 375.0
 offset_bottom = 127.0
 
-[node name="Button" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
+[node name="shuffleLetter" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
@@ -568,7 +572,11 @@ texture_pressed = ExtResource("57_gx4rg")
 
 [connection signal="button_down" from="Control/InputContainer/SubmitButton" to="Control" method="ui_text_submit"]
 [connection signal="pressed" from="Control/InputContainer/SubmitButton" to="Control" method="on_word_submitted"]
+[connection signal="timeout" from="Control/InputContainer/FeedbackLabel/HideTimer" to="Control" method="_on_timer_timeout"]
 [connection signal="pressed" from="Control/GGButton" to="Control" method="on_gg_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="Control" method="on_reset_button_pressed"]
 [connection signal="pressed" from="Control/HomeButton" to="Control" method="_on_home_button_pressed"]
 [connection signal="pressed" from="Control/ShopButton" to="Control" method="_on_shop_button_pressed"]
+[connection signal="pressed" from="Control/ShopButton/ShopPanel/ItemPanel/AddHeartButton" to="Control" method="_on_add_heart_button_pressed"]
+[connection signal="pressed" from="Control/ShopButton/ShopPanel/ItemPanel2/WildCard" to="Control" method="_on_wild_card_pressed"]
+[connection signal="pressed" from="Control/ShopButton/ShopPanel/ItemPanel3/shuffleLetter" to="Control" method="_on_shuffle_letter_pressed"]
