@@ -347,7 +347,9 @@ func _on_add_heart_button_pressed() -> void:
 	if(coins >= 2):
 		lives = 3
 		update_lives_asset()
-		coins =- 3
+		coins -= 2
+		update_coins()
+		coins_goal -= 20
 		show_message("You've restored your lives",2.0)
 	else: 
 		show_message("❗Not Enough Coins❗",2.0)  
@@ -356,7 +358,9 @@ func _on_wild_card_pressed() -> void:
 	if(coins >= 1):
 		player_hand.append("+")
 		update_text_display()
-		coins =- 3
+		coins -= 2
+		update_coins()
+		coins_goal -= 20
 		show_message("You've activated Wildcard buff",2.0)
 	else: 
 		show_message("❗Not Enough Coins❗",2.0) 
@@ -365,7 +369,9 @@ func _on_wild_card_pressed() -> void:
 func _on_shuffle_letter_pressed() -> void:
 	if(coins >= 3):
 		draw_initial_hand()
-		coins =- 3
+		coins -= 3
+		update_coins()
+		coins_goal -= 20
 		print("pressed")
 		show_message("You've activated Letter Burst buff",2.0)
 	else: 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=85 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://c4qlgjd4a7o0l" path="res://assets/background.png" id="1_ntx8l"]
@@ -15,14 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://5mn0ignb3pak" path="res://assets/keyboard/pressed/L. Key 17.png" id="7_facbu"]
 [ext_resource type="Texture2D" uid="uid://bb5y6sjhl71" path="res://assets/reset.png" id="7_ruth0"]
 [ext_resource type="FontFile" uid="uid://bsppnpuk4ew0h" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="8_b17eg"]
-[ext_resource type="Texture2D" uid="uid://cfevgpfjvi5ar" path="res://assets/shop-icon.png" id="9_pjyto"]
 [ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
 [ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://mxfwmsbd5s0s" path="res://assets/keyboard/normal/L. Key 18.png" id="12_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://b1k45612breni" path="res://assets/home.png" id="12_uatky"]
+[ext_resource type="Texture2D" uid="uid://dvaqs5qjkpop4" path="res://assets/items/potion.png" id="13_1vm84"]
 [ext_resource type="Texture2D" uid="uid://bc2oxuvtpaj1" path="res://assets/keyboard/pressed/L. Key 18.png" id="13_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://dpmuskyuqiec3" path="res://assets/keyboard/normal/L. Key 20.png" id="14_gngh3"]
+[ext_resource type="Texture2D" uid="uid://bnfu55ddgmtnw" path="res://assets/items/wildcard.png" id="14_wu3dr"]
 [ext_resource type="Texture2D" uid="uid://dsj5x2pv0nnn1" path="res://assets/keyboard/pressed/L. Key 20.png" id="15_0n3wm"]
+[ext_resource type="Texture2D" uid="uid://b6v6yrxkdi7ka" path="res://assets/items/ada_doll.png" id="15_cyx1q"]
 [ext_resource type="Texture2D" uid="uid://b6duup646v8nc" path="res://assets/keyboard/normal/L. Key 24.png" id="16_qnost"]
 [ext_resource type="Texture2D" uid="uid://csr4qrn6j8smj" path="res://assets/keyboard/pressed/L. Key 24.png" id="17_wnkbs"]
 [ext_resource type="Texture2D" uid="uid://cydyvqqxw0ldh" path="res://assets/keyboard/normal/L. Key 21.png" id="18_f6a44"]
@@ -356,11 +358,23 @@ offset_bottom = 127.0
 
 [node name="AddHeartButton" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel"]
 layout_mode = 1
-offset_right = 24.0
-offset_bottom = 24.0
-scale = Vector2(4.23146, 4.17393)
-icon = ExtResource("9_pjyto")
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 269.0
+offset_bottom = 267.0
+scale = Vector2(0.35, 0.35)
+icon = ExtResource("13_1vm84")
 flat = true
+
+[node name="Label" type="Label" parent="Control/ShopButton/ShopPanel/ItemPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 101.0
+offset_right = 109.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_font_sizes/font_size = 18
+text = "Hearts (2)"
 
 [node name="ItemPanel2" type="Panel" parent="Control/ShopButton/ShopPanel"]
 layout_mode = 0
@@ -371,11 +385,21 @@ offset_bottom = 128.0
 
 [node name="WildCard" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
 layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-scale = Vector2(4.23146, 4.17393)
-icon = ExtResource("9_pjyto")
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 267.0
+offset_bottom = 268.0
+scale = Vector2(0.35, 0.35)
+icon = ExtResource("14_wu3dr")
 flat = true
+
+[node name="Label" type="Label" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
+offset_top = 100.0
+offset_right = 114.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_font_sizes/font_size = 18
+text = "Wildcard (2)"
 
 [node name="ItemPanel3" type="Panel" parent="Control/ShopButton/ShopPanel"]
 layout_mode = 0
@@ -386,11 +410,22 @@ offset_bottom = 127.0
 
 [node name="shuffleLetter" type="Button" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
 layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-scale = Vector2(4.25688, 4.17393)
-icon = ExtResource("9_pjyto")
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 268.0
+offset_bottom = 268.0
+scale = Vector2(0.35, 0.35)
+icon = ExtResource("15_cyx1q")
 flat = true
+
+[node name="Label" type="Label" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
+offset_left = 8.0
+offset_top = 101.0
+offset_right = 95.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_font_sizes/font_size = 18
+text = "Shuffle (3)"
 
 [node name="KeyboardControl" type="Control" parent="."]
 layout_mode = 3
