@@ -394,6 +394,7 @@ icon = ExtResource("14_wu3dr")
 flat = true
 
 [node name="Label" type="Label" parent="Control/ShopButton/ShopPanel/ItemPanel2"]
+layout_mode = 0
 offset_top = 100.0
 offset_right = 114.0
 offset_bottom = 125.0
@@ -419,6 +420,7 @@ icon = ExtResource("15_cyx1q")
 flat = true
 
 [node name="Label" type="Label" parent="Control/ShopButton/ShopPanel/ItemPanel3"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 101.0
 offset_right = 95.0

@@ -25,6 +25,7 @@ var letter_points := {
 var letter_textures := {}
 var turn_count := 0
 const SHOP_INTERVAL := 2
+var used_wildcard := false
 
 @onready var letters_container = $LettersContainer
 @onready var score_label = $InputContainer/ScoreLabel
@@ -219,7 +220,6 @@ func setup_lives_display():
 
 # Game Logic
 func is_word_valid(word: String) -> bool:
-	var used_wild: bool = false;
 	if word.length() < 3:
 		return false
 	var temp_hand := player_hand.duplicate()
@@ -227,11 +227,13 @@ func is_word_valid(word: String) -> bool:
 		if letter in temp_hand:
 			#temp_hand.erase(letter)
 			continue
-		elif "+" in temp_hand and not used_wild:
-			temp_hand.erase("+")
-			used_wild = true;
-			continue
+		#elif "+" in temp_hand and not used_wildcard:
+			#temp_hand.erase("+")
+			#used_wildcard = true;
+			#continue
 		else:
+			if used_wildcard == true:
+				return true
 			return false
 	if dictionary_prog.has(word.to_lower()):
 		return true
@@ -266,6 +268,7 @@ func on_word_submitted():
 	last_word_label.text = "Last input: %s" % input_word
 	definition_label.text = ""
 	if is_word_valid(input_word):
+		used_wildcard = false
 		update_shop_countdown()
 		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
@@ -363,6 +366,7 @@ func _on_add_heart_button_pressed() -> void:
 
 func _on_wild_card_pressed() -> void:
 	if(coins >= 1):
+		used_wildcard = true
 		player_hand.append("+")
 		update_text_display()
 		coins -= 2
