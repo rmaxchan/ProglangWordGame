@@ -24,6 +24,7 @@ var letter_points := {
 }
 var letter_textures := {}
 var turn_count := 0
+var dictionary_resource: DictionaryResource
 const SHOP_INTERVAL := 2
 
 @onready var letters_container = $LettersContainer
@@ -118,14 +119,6 @@ func remove_used_letters(word: String):
 		player_hand.erase(letter)
 	if player_hand.has("+"):
 		player_hand.erase("+")
-		#if not vowels.has(letter):
-			#vowels.append(letter)
-		#elif not letters_all.has(letter):
-			#letters_all.append(letter)
-#
-	#letters_all.shuffle()
-	#vowels.shuffle()
-	#print(vowels)
 # Letters
 
 # Update UI
@@ -157,8 +150,8 @@ func update_text_display():
 			print("Texture not found for letter: %s" % letter)
 
 func update_last_word_display(input_word: String):
-	if dictionary_prog.has(input_word):
-		definition_label.text = "Definition: %s" % dictionary_prog[input_word]
+	if dictionary_resource.programming_words.has(input_word):
+		definition_label.text = "Definition: %s" % dictionary_resource.programming_words[input_word]
 		#print("Definition found!")
 	else:
 		definition_label.text = ""
@@ -167,35 +160,35 @@ func update_last_word_display(input_word: String):
 
 # Load Assets
 func load_dictionary():
-	var file_eng = FileAccess.open("res://assets/dictionary.txt", FileAccess.READ)
-	if file_eng:
-		var content = file_eng.get_as_text().strip_edges().to_upper()
-		for word in content.split("\n"):
-			var clean_word = word.strip_edges().replace('"','')
-			if clean_word != "":
-				dictionary.append(clean_word)
-		print("Dictionary loaded with %d words" % dictionary.size())
-		file_eng.close()
-	
-	var file_prog = FileAccess.open("res://assets/dictionary_prog.txt", FileAccess.READ)
-	if file_prog:
-		while not file_prog.eof_reached():
-			var line = file_prog.get_line().strip_edges()
-			if line.is_empty():
-				continue
-			var comma_split = line.find(",")
-			if comma_split != -1:
-				var word = line.substr(0, comma_split).strip_edges().trim_prefix('"').trim_suffix('"')
-				var definition = line.substr(comma_split + 1).strip_edges().trim_prefix('"').trim_suffix('"')
-				dictionary_prog[word] = definition
-		#var content = file_prog.get_as_text().strip_edges().to_upper()
-		#for word in content.split(","):
-			#var clean_word = word.strip_edges()
+	#var file_eng = FileAccess.open("res://dictionary.txt", FileAccess.READ)
+	#if file_eng:
+		#var content = file_eng.get_as_text().strip_edges().to_upper()
+		#for word in content.split("\n"):
+			#var clean_word = word.strip_edges().replace('"','')
 			#if clean_word != "":
-				#dictionary_prog.append(clean_word)
-		file_prog.close()
-		print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
-	#print(dictionary_prog) #debug
+				#dictionary.append(clean_word)
+		#print("Dictionary loaded with %d words" % dictionary.size())
+		#file_eng.close()
+	#
+	#var file_prog = FileAccess.open("res://dictionary_prog.txt", FileAccess.READ)
+	#if file_prog:
+		#while not file_prog.eof_reached():
+			#var line = file_prog.get_line().strip_edges()
+			#if line.is_empty():
+				#continue
+			#var comma_split = line.find(",")
+			#if comma_split != -1:
+				#var word = line.substr(0, comma_split).strip_edges().trim_prefix('"').trim_suffix('"')
+				#var definition = line.substr(comma_split + 1).strip_edges().trim_prefix('"').trim_suffix('"')
+				#dictionary_prog[word] = definition
+		#file_prog.close()
+		#print("Dictionary (Prog) loaded with %d words" % dictionary_prog.size())
+	dictionary_resource = load("res://dictionary_resource.tres") as DictionaryResource
+	if dictionary_resource:
+		print("English Dictionary loaded with %d words" % dictionary_resource.english_words.size())
+		print("Programming Dictionary loaded with %d words" % dictionary_resource.programming_words.size())
+	else:
+		print("Failed to load dictionary resource")
 
 func load_letter_textures():
 	for letter in "+ABCDEFGHIJKLMNOPQRSTUVWXYZ":
@@ -234,11 +227,11 @@ func is_word_valid(word: String) -> bool:
 			continue
 		else:
 			return false
-	if dictionary_prog.has(word.to_lower()):
+	if dictionary_resource.programming_words.has(word.to_lower()):
 		return true
-	if not dictionary.has(word):
-		return false
-	return true
+	if dictionary_resource.english_words.has(word):
+		return true
+	return false
 
 func calculate_score(word: String) -> int:
 	var word_score := 0
@@ -282,7 +275,7 @@ func on_word_submitted():
 	if is_word_valid(input_word):
 		update_shop_countdown()
 		enable_shop()
-		if dictionary_prog.has(input_word.to_lower()):
+		if dictionary_resource.programming_words.has(input_word.to_lower()):
 			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
@@ -295,7 +288,7 @@ func on_word_submitted():
 		update_last_word_display(input_word.to_lower())
 		
 		var word_score = calculate_score(input_word)
-		if dictionary_prog.has(input_word.to_lower()):
+		if dictionary_resource.programming_words.has(input_word.to_lower()):
 			word_score *= 2
 		score += word_score
 		score_label.text = "Score: %d" % score
