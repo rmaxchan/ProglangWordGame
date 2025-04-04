@@ -229,10 +229,10 @@ func is_word_valid(word: String) -> bool:
 			continue
 		else:
 			return false
-	#if dictionary_prog.has(word.to_lower()):
-		#return true
-	#if not dictionary.has(word):
-		#return false
+	if dictionary_prog.has(word.to_lower()):
+		return true
+	if not dictionary.has(word):
+		return false
 	return true
 
 func calculate_score(word: String) -> int:
