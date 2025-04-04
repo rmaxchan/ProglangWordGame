@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=83 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://c4qlgjd4a7o0l" path="res://assets/background.png" id="1_ntx8l"]
@@ -140,6 +140,18 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vm84"]
+bg_color = Color(0.152008, 0.14477, 0.411161, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uatky"]
+bg_color = Color(0.152008, 0.14477, 0.411161, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqtf5"]
+bg_color = Color(0.152008, 0.14477, 0.411161, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu3dr"]
+bg_color = Color(0.152008, 0.14477, 0.411161, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4vd"]
 bg_color = Color(0.24512, 0.2048, 0.32, 1)
 corner_radius_top_left = 5
@@ -227,9 +239,9 @@ offset_bottom = 600.0
 scale = Vector2(1.25, 1.25)
 
 [node name="Line2D" type="Line2D" parent="Control"]
-position = Vector2(5.35983, 31)
-scale = Vector2(1.35983, 1.25)
-points = PackedVector2Array(1, -1, 221.838, -1, 236, -1)
+position = Vector2(5.15639, 32.8125)
+scale = Vector2(1.15639, 1.1875)
+points = PackedVector2Array(1, -1, 221.838, -1)
 width = 2.0
 default_color = Color(0.489622, 0.489622, 0.489622, 1)
 joint_mode = 2
@@ -248,23 +260,27 @@ offset_top = 466.0
 offset_right = 1048.0
 offset_bottom = 489.0
 theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1vm84")
 text = "Coins: 0"
 
 [node name="DefContainer" type="VBoxContainer" parent="Control"]
+clip_contents = true
 layout_mode = 0
-offset_left = 6.35983
+offset_left = 6.0
 offset_top = 7.0
-offset_right = 305.36
-offset_bottom = 105.0
+offset_right = 256.0
+offset_bottom = 312.0
 
-[node name="LastWordLabel" type="Label" parent="Control/DefContainer"]
+[node name="LastWordLabel" type="RichTextLabel" parent="Control/DefContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uatky")
 text = "Your last input shows up here"
+fit_content = true
+autowrap_mode = 2
 
 [node name="DefinitionLabel" type="RichTextLabel" parent="Control/DefContainer"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("8_b17eg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rqtf5")
 text = "Programming definitions show up here"
 fit_content = true
 autowrap_mode = 2
@@ -309,6 +325,7 @@ scale = Vector2(1.00281, 1.13263)
 [node name="TurnCount" type="Label" parent="Control/TurnCountContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_b17eg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu3dr")
 text = "Turns left before shop appears: 2"
 
 [node name="ShopButton" type="Button" parent="Control"]
