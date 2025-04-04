@@ -25,7 +25,6 @@ var letter_points := {
 var letter_textures := {}
 var turn_count := 0
 const SHOP_INTERVAL := 2
-var used_wildcard := false
 
 @onready var letters_container = $LettersContainer
 @onready var score_label = $InputContainer/ScoreLabel
@@ -220,7 +219,8 @@ func setup_lives_display():
 
 # Game Logic
 func is_word_valid(word: String) -> bool:
-	used_wildcard = false
+	var used_wild: bool = false;
+	#var counter = 0
 	if word.length() < 3:
 		return false
 	var temp_hand := player_hand.duplicate()
@@ -228,9 +228,9 @@ func is_word_valid(word: String) -> bool:
 		if letter in temp_hand:
 			#temp_hand.erase(letter)
 			continue
-		elif "+" in temp_hand and not used_wildcard:
+		elif "+" in temp_hand and not used_wild:
 			temp_hand.erase("+")
-			used_wildcard = true
+			used_wild = true;
 			continue
 		else:
 			return false
@@ -280,17 +280,14 @@ func on_word_submitted():
 	last_word_label.text = "Last input: %s" % input_word
 	definition_label.text = ""
 	if is_word_valid(input_word):
-		#used_wildcard = false
 		update_shop_countdown()
 		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
-			#show_message("🎉 Proggers! Score doubled and lives restored!", 3.0)
 			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
 			update_lives_asset()
 		else:
-			#show_message("✅ Word accepted but is not Proggers! -1 Heart!",3.0)
 			$InputContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
 			reaction = 0;
 			lives -= 1;
@@ -309,7 +306,6 @@ func on_word_submitted():
 		if lives <= 0:
 			game_over()
 	else:
-		#show_message("❌ Invalid Input! Try checking your letters.", 3.0)
 		$InputContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
 		reaction = 2;
 	update_text_display()
@@ -328,7 +324,6 @@ func _on_home_button_pressed():
 
 # End
 func game_over():
-	#show_message("💀 Skill Issue! 🗿 Final Score: %d" % score, 3.0)
 	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
 	reaction = 3
 	update_reaction_asset()
@@ -379,8 +374,7 @@ func _on_add_heart_button_pressed() -> void:
 		show_message("❗Not Enough Coins❗",2.0)  
 
 func _on_wild_card_pressed() -> void:
-	if(coins >= 1):
-		#used_wildcard = true
+	if(coins >= 2):
 		player_hand.append("+")
 		update_text_display()
 		coins -= 2
