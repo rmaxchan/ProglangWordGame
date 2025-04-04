@@ -116,6 +116,8 @@ func draw_letters():
 func remove_used_letters(word: String):
 	for letter in word:
 		player_hand.erase(letter)
+	if player_hand.has("+"):
+		player_hand.erase("+")
 		#if not vowels.has(letter):
 			#vowels.append(letter)
 		#elif not letters_all.has(letter):
@@ -217,6 +219,7 @@ func setup_lives_display():
 
 # Game Logic
 func is_word_valid(word: String) -> bool:
+	var used_wild: bool = false;
 	if word.length() < 3:
 		return false
 	var temp_hand := player_hand.duplicate()
@@ -224,8 +227,9 @@ func is_word_valid(word: String) -> bool:
 		if letter in temp_hand:
 			#temp_hand.erase(letter)
 			continue
-		elif "+" in temp_hand:
-			#temp_hand.erase("+")
+		elif "+" in temp_hand and not used_wild:
+			temp_hand.erase("+")
+			used_wild = true;
 			continue
 		else:
 			return false
@@ -243,10 +247,13 @@ func calculate_score(word: String) -> int:
 	return word_score
 
 func update_coins():
-	if score >= coins_goal:
+	if score >= (coins_goal+20):
+		coins += 2
+		coins_goal += 40
+	elif score >= coins_goal:
 		coins += 1
 		coins_goal += 20
-		coins_label.text = "Coins: %d" % coins
+	coins_label.text = "Coins: %d" % coins
 # Game Logic
 
 # Buttons
@@ -257,6 +264,7 @@ func on_virtual_kbd_pressed(key_letter: String):
 func on_word_submitted():
 	var input_word = $InputContainer/WordInput.text.to_upper()
 	last_word_label.text = "Last input: %s" % input_word
+	definition_label.text = ""
 	if is_word_valid(input_word):
 		update_shop_countdown()
 		enable_shop()
@@ -359,7 +367,7 @@ func _on_wild_card_pressed() -> void:
 		update_text_display()
 		coins -= 2
 		coins_label.text = "Coins: %d" % coins
-		show_message("You've activated Wildcard buff",2.0)
+		show_message("You've activated Wildcard buff for one turn!",2.0)
 	else: 
 		show_message("❗Not Enough Coins❗",2.0) 
 
