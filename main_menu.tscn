@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://dieftdn612yt5"]
+
+[ext_resource type="Script" uid="uid://dx4fiuy0xwesa" path="res://Menu.gd" id="1_06t4h"]
+[ext_resource type="FontFile" uid="uid://bsppnpuk4ew0h" path="res://assets/PixelifySans-VariableFont_wght.ttf" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://bovl6c07ip5o0" path="res://assets/mm_background.png" id="2_jix8l"]
+[ext_resource type="Texture2D" uid="uid://byfu8okst8wi7" path="res://assets/jrpr.png" id="3_glbon"]
+[ext_resource type="Texture2D" uid="uid://dat0v24uqr2e1" path="res://assets/proggers.png" id="4_glbon"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="BGRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 2560.0
+offset_bottom = 1920.0
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("2_jix8l")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 472.0
+offset_right = 1032.0
+offset_bottom = 1496.0
+scale = Vector2(0.165, 0.165)
+texture = ExtResource("3_glbon")
+expand_mode = 1
+
+[node name="MMButtons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 401.0
+offset_right = 645.0
+offset_bottom = 505.0
+
+[node name="PlayButton" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "Start"
+
+[node name="How2Button" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "How to Play"
+
+[node name="ExitButton" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+
+[node name="ProggersRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = -56.0
+offset_right = 1577.0
+offset_bottom = 968.0
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("4_glbon")
+
+[node name="TitleLabel1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 688.0
+offset_top = 312.0
+offset_right = 1078.0
+offset_bottom = 337.0
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "A SURVIVAL WORD GAME "
+
+[node name="TitleLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 336.0
+offset_right = 1166.0
+offset_bottom = 361.0
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "FOR PROGRAMMING"
+
+[connection signal="pressed" from="MMButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MMButtons/ExitButton" to="." method="_on_exit_button_pressed"]

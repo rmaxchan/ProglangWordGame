@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://cvseyj1185fgj"]
+[gd_scene load_steps=79 format=3 uid="uid://cvseyj1185fgj"]
 
 [ext_resource type="Script" uid="uid://c12x7gc5fmaj8" path="res://Game.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://c4qlgjd4a7o0l" path="res://assets/background.png" id="1_ntx8l"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bxvjcx7rmop0x" path="res://assets/keyboard/normal/L. Key 5.png" id="10_h8e4i"]
 [ext_resource type="Texture2D" uid="uid://bqj76n4tc523d" path="res://assets/keyboard/pressed/L. Key 5.png" id="11_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://mxfwmsbd5s0s" path="res://assets/keyboard/normal/L. Key 18.png" id="12_0cp0l"]
+[ext_resource type="Texture2D" uid="uid://b1k45612breni" path="res://assets/home.png" id="12_uatky"]
 [ext_resource type="Texture2D" uid="uid://bc2oxuvtpaj1" path="res://assets/keyboard/pressed/L. Key 18.png" id="13_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://dpmuskyuqiec3" path="res://assets/keyboard/normal/L. Key 20.png" id="14_gngh3"]
 [ext_resource type="Texture2D" uid="uid://dsj5x2pv0nnn1" path="res://assets/keyboard/pressed/L. Key 20.png" id="15_0n3wm"]
@@ -166,18 +167,18 @@ heart_texture = ExtResource("5_rm4vd")
 
 [node name="LettersContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 2
-offset_left = 316.0
-offset_top = 255.0
-offset_right = 793.0
-offset_bottom = 255.0
-scale = Vector2(1.49, 1.49)
+offset_left = 312.0
+offset_top = 258.0
+offset_right = 707.0
+offset_bottom = 258.0
+scale = Vector2(1.6, 1.6)
 
 [node name="InputContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 312.0
-offset_top = 224.0
+offset_top = 231.0
 offset_right = 789.0
-offset_bottom = 455.0
+offset_bottom = 462.0
 alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control/InputContainer"]
@@ -206,20 +207,19 @@ theme_override_fonts/font = ExtResource("8_b17eg")
 [node name="LivesContainer" type="HBoxContainer" parent="Control"]
 visibility_layer = 3
 layout_mode = 0
-offset_left = 825.0
-offset_top = 440.0
-offset_right = 1008.0
-offset_bottom = 497.0
+offset_left = 312.0
+offset_top = 196.0
+offset_right = 495.0
+offset_bottom = 253.0
 theme = SubResource("Theme_ig7tw")
-alignment = 1
 
 [node name="ReactionImage" type="TextureRect" parent="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 448.0
-offset_top = 464.0
-offset_right = 568.0
-offset_bottom = 584.0
+offset_left = 476.0
+offset_top = 480.0
+offset_right = 596.0
+offset_bottom = 600.0
 scale = Vector2(1.25, 1.25)
 
 [node name="Line2D" type="Line2D" parent="Control"]
@@ -233,16 +233,16 @@ begin_cap_mode = 1
 end_cap_mode = 1
 
 [node name="CoinSprite" type="AnimatedSprite2D" parent="Control"]
-position = Vector2(987, 475)
+position = Vector2(972, 477)
 sprite_frames = SubResource("SpriteFrames_kkkcx")
 animation = &"Spin"
 
 [node name="CoinLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1002.0
-offset_top = 464.0
-offset_right = 1063.0
-offset_bottom = 487.0
+offset_left = 987.0
+offset_top = 466.0
+offset_right = 1048.0
+offset_bottom = 489.0
 theme_override_fonts/font = ExtResource("8_b17eg")
 text = "Coins: 0"
 
@@ -278,11 +278,21 @@ stretch_mode = 1
 visible = false
 layout_mode = 0
 offset_left = 1088.0
-offset_top = 512.0
+offset_top = 584.0
 offset_right = 1152.0
-offset_bottom = 576.0
+offset_bottom = 648.0
 texture_normal = ExtResource("7_ruth0")
 stretch_mode = 1
+
+[node name="HomeButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 520.0
+offset_right = 1714.0
+offset_bottom = 1146.0
+scale = Vector2(0.105, 0.105)
+texture_normal = ExtResource("12_uatky")
+stretch_mode = 4
 
 [node name="TurnCountContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 2
@@ -560,4 +570,5 @@ texture_pressed = ExtResource("57_gx4rg")
 [connection signal="pressed" from="Control/InputContainer/SubmitButton" to="Control" method="on_word_submitted"]
 [connection signal="pressed" from="Control/GGButton" to="Control" method="on_gg_button_pressed"]
 [connection signal="pressed" from="Control/ResetButton" to="Control" method="on_reset_button_pressed"]
+[connection signal="pressed" from="Control/HomeButton" to="Control" method="_on_home_button_pressed"]
 [connection signal="pressed" from="Control/ShopButton" to="Control" method="_on_shop_button_pressed"]
