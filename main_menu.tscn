@@ -86,6 +86,14 @@ theme_override_fonts/font = ExtResource("2_7vrkn")
 theme_override_font_sizes/font_size = 20
 text = "Exit"
 
+[node name="HighScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 408.0
+offset_right = 784.0
+offset_bottom = 431.0
+text = "Your High Score:"
+
 [connection signal="pressed" from="MMButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MMButtons/How2Button" to="." method="_on_how_2_button_pressed"]
 [connection signal="pressed" from="MMButtons/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -220,6 +220,7 @@ func setup_lives_display():
 
 # Game Logic
 func is_word_valid(word: String) -> bool:
+	used_wildcard = false
 	if word.length() < 3:
 		return false
 	var temp_hand := player_hand.duplicate()
@@ -227,13 +228,11 @@ func is_word_valid(word: String) -> bool:
 		if letter in temp_hand:
 			#temp_hand.erase(letter)
 			continue
-		#elif "+" in temp_hand and not used_wildcard:
-			#temp_hand.erase("+")
-			#used_wildcard = true;
-			#continue
+		elif "+" in temp_hand and not used_wildcard:
+			temp_hand.erase("+")
+			used_wildcard = true
+			continue
 		else:
-			if used_wildcard == true:
-				return true
 			return false
 	if dictionary_prog.has(word.to_lower()):
 		return true
@@ -247,6 +246,19 @@ func calculate_score(word: String) -> int:
 		word_score += letter_points.get(letter, 0)
 		#print("Score added:%d" % word_score + "into %d" % score)
 	return word_score
+
+func set_high_score(new_score):
+	var file = FileAccess.open("user://hsproggers.bin", FileAccess.WRITE)
+	file.store_32(new_score)
+	file.close()
+
+func get_high_score():
+	if FileAccess.file_exists("user://hsproggers.bin"):
+		var file = FileAccess.open("user://hsproggers.bin", FileAccess.READ)
+		var high_score = file.get_32()
+		file.close()
+		return high_score
+	return 0
 
 func update_coins():
 	if score >= (coins_goal+20):
@@ -268,7 +280,7 @@ func on_word_submitted():
 	last_word_label.text = "Last input: %s" % input_word
 	definition_label.text = ""
 	if is_word_valid(input_word):
-		used_wildcard = false
+		#used_wildcard = false
 		update_shop_countdown()
 		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
@@ -320,6 +332,8 @@ func game_over():
 	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
 	reaction = 3
 	update_reaction_asset()
+	if score > get_high_score():
+		set_high_score(score)
 	$InputContainer/SubmitButton.disabled = true
 	$InputContainer/WordInput.editable = false
 	$GGButton.hide()
@@ -366,7 +380,7 @@ func _on_add_heart_button_pressed() -> void:
 
 func _on_wild_card_pressed() -> void:
 	if(coins >= 1):
-		used_wildcard = true
+		#used_wildcard = true
 		player_hand.append("+")
 		update_text_display()
 		coins -= 2
