@@ -298,6 +298,9 @@ func on_gg_button_pressed():
 
 func on_reset_button_pressed():
 	reset_game()
+
+func _on_home_button_pressed():
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 # Button
 
 # End
