@@ -32,31 +32,6 @@ scale = Vector2(0.165, 0.165)
 texture = ExtResource("3_glbon")
 expand_mode = 1
 
-[node name="MMButtons" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 509.0
-offset_top = 401.0
-offset_right = 645.0
-offset_bottom = 505.0
-
-[node name="PlayButton" type="Button" parent="MMButtons"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_7vrkn")
-theme_override_font_sizes/font_size = 20
-text = "Start"
-
-[node name="How2Button" type="Button" parent="MMButtons"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_7vrkn")
-theme_override_font_sizes/font_size = 20
-text = "How to Play"
-
-[node name="ExitButton" type="Button" parent="MMButtons"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_7vrkn")
-theme_override_font_sizes/font_size = 20
-text = "Exit"
-
 [node name="ProggersRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 208.0
@@ -85,6 +60,31 @@ offset_bottom = 361.0
 theme_override_fonts/font = ExtResource("2_7vrkn")
 theme_override_font_sizes/font_size = 20
 text = "FOR PROGRAMMING"
+
+[node name="MMButtons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 401.0
+offset_right = 645.0
+offset_bottom = 508.0
+
+[node name="PlayButton" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "Start"
+
+[node name="How2Button" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "How to Play"
+
+[node name="ExitButton" type="Button" parent="MMButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
 
 [connection signal="pressed" from="MMButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MMButtons/ExitButton" to="." method="_on_exit_button_pressed"]
