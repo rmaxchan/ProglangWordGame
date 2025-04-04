@@ -341,9 +341,9 @@ func _on_add_heart_button_pressed() -> void:
 		lives = 3
 		update_lives_asset()
 		coins =- 3
-		print("pressed")
+		show_message("You've restored your lives",2.0)
 	else: 
-		show_message("You've restored your lives",2.0) 
+		show_message("❗Not Enough Coins❗",2.0)  
 
 func _on_wild_card_pressed() -> void:
 	if(coins >= 1):
