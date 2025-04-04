@@ -222,10 +222,11 @@ func is_word_valid(word: String) -> bool:
 	var temp_hand := player_hand.duplicate()
 	for letter in word:
 		if letter in temp_hand:
-			temp_hand.erase(letter)
+			#temp_hand.erase(letter)
 			continue
 		elif "+" in temp_hand:
-			temp_hand.erase("+")
+			#temp_hand.erase("+")
+			continue
 		else:
 			return false
 	#if dictionary_prog.has(word.to_lower()):
@@ -260,14 +261,14 @@ func on_word_submitted():
 		update_shop_countdown()
 		enable_shop()
 		if dictionary_prog.has(input_word.to_lower()):
-			show_message("🎉 Proggers! Score doubled and lives restored!", 3.0)
-			#$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
+			#show_message("🎉 Proggers! Score doubled and lives restored!", 3.0)
+			$InputContainer/FeedbackLabel.text = "🎉 Proggers! Score doubled and lives restored!"
 			reaction = 1;
 			lives = 3;
 			update_lives_asset()
 		else:
-			show_message("✅ Word accepted but is not Proggers! -1 Heart!",3.0)
-			#$InputContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
+			#show_message("✅ Word accepted but is not Proggers! -1 Heart!",3.0)
+			$InputContainer/FeedbackLabel.text = "✅ Word accepted but is not Proggers! -1 Heart!"
 			reaction = 0;
 			lives -= 1;
 			update_lives_asset()
@@ -285,8 +286,8 @@ func on_word_submitted():
 		if lives <= 0:
 			game_over()
 	else:
-		show_message("❌ Invalid Input! Try checking your letters.", 3.0)
-		#$InputContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
+		#show_message("❌ Invalid Input! Try checking your letters.", 3.0)
+		$InputContainer/FeedbackLabel.text = "❌ Invalid Input! Try checking your letters."
 		reaction = 2;
 	update_text_display()
 	update_reaction_asset()
@@ -301,7 +302,8 @@ func on_reset_button_pressed():
 
 # End
 func game_over():
-	show_message("💀 Skill Issue! 🗿 Final Score: %d" % score, 3.0)
+	#show_message("💀 Skill Issue! 🗿 Final Score: %d" % score, 3.0)
+	$InputContainer/FeedbackLabel.text = "💀 Skill Issue! 🗿 Final Score: %d" % score
 	reaction = 3
 	update_reaction_asset()
 	$InputContainer/SubmitButton.disabled = true
