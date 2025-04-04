@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci8t8tmgilpim"]
+
+[ext_resource type="Script" uid="uid://hlx007qurisn" path="res://HowTo.gd" id="1_tb67s"]
+[ext_resource type="Texture2D" uid="uid://dwr3xuty7d6uw" path="res://assets/how_to.png" id="2_5ula1"]
+
+[node name="HowTo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tb67s")
+
+[node name="HowToInfo" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.995, 0.995)
+texture_normal = ExtResource("2_5ula1")
+
+[connection signal="pressed" from="HowToInfo" to="." method="_on_how_to_info_pressed"]

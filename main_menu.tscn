@@ -87,4 +87,5 @@ theme_override_font_sizes/font_size = 20
 text = "Exit"
 
 [connection signal="pressed" from="MMButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MMButtons/How2Button" to="." method="_on_how_2_button_pressed"]
 [connection signal="pressed" from="MMButtons/ExitButton" to="." method="_on_exit_button_pressed"]
