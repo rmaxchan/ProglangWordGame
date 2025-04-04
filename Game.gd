@@ -318,6 +318,8 @@ func reset_game():
 	score = 0
 	lives = 3
 	turn_count = 0
+	coins = 0
+	coins_goal = 20
 	#$VBoxContainer/SubmitButton.disabled = false
 	#$VBoxContainer/WordInput.editable = true
 	score_label.text = "Score: 0"
